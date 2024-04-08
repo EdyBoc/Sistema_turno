@@ -8,7 +8,7 @@
     <a class="nav-link" href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
-    <a class="nav-link" href="">
+    <a class="nav-link" href="/dependencia">
         <i class=" fa fa-file"></i><span>Dependencia</span>
     </a>
     <a class="nav-link" href="">
