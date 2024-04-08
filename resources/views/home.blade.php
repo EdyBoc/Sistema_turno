@@ -53,6 +53,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12 col-xl-12">
+                                        <div class="card bg-c-pink order-card">
+                                            <div class="card-block">
+                                                <h5>Graficas</h5>                                                                              
+                                                <div id="piechart" style="width: 100%; height: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>                        
                         </div>
                     </div>
@@ -60,5 +68,31 @@
             </div>
         </div>
     </section>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'Grafica cantidad de usuarios'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 @endsection
 
