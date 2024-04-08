@@ -23,7 +23,7 @@ class SeederTablaPermisos extends Seeder
             'editar-rol',
             'borrar-rol',
 
-            //Operacions sobre tabla blogs
+            //test de prueba Operacions sobre tabla blogs
             'ver-blog',
             'crear-blog',
             'editar-blog',
