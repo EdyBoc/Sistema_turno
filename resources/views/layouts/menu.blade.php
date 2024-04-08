@@ -8,6 +8,12 @@
     <a class="nav-link" href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
+    <a class="nav-link" href="">
+        <i class=" fas fa-user-lock"></i><span>Dependencia</span>
+    </a>
+    <a class="nav-link" href="">
+        <i class=" fas fa-user-lock"></i><span>Turno</span>
+    </a>
     <a class="nav-link" href="/blogs">
         <i class=" fas fa-blog"></i><span>Blogs</span>
     </a>
