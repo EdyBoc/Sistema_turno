@@ -19,7 +19,7 @@ Publico
                         @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
                         @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">lOGIN</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">INICIAR SESION</a>
 
                         @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">REGISTRARSE</a>
@@ -31,7 +31,7 @@ Publico
                 </div>
                 <div class="form-group">
                     <label for="lb_codigo">CODIGO</label>
-                    <input type="password" class="form-control" id="codigo" name="codigo" placeholder="Ingrese su codigo AQUI">
+                    <input type="password" class="form-control" id="codigo" name="codigo" placeholder="Ingrese su codigo">
                 </div>
 
                 <div class="row">
@@ -71,11 +71,7 @@ Publico
 
         document.getElementById('clock').innerHTML = horaActual;
     }
-
-    // Actualizar cada segundo
     setInterval(mostrarHora, 1000);
-
-    // Mostrar la hora inicial
     mostrarHora();
 </script>
 

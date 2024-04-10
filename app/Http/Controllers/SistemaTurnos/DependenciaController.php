@@ -21,10 +21,9 @@ class DependenciaController extends Controller
         //$dependencia = Dependencia::paginate(5);
         //return view('dependencia.index',compact('blogs'));
         return view('dependencia.index');
-
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -32,9 +31,5 @@ class DependenciaController extends Controller
     public function create()
     {
         return view('dependencia.crear');
-
     }
-
-
 }
-
