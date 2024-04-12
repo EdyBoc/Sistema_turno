@@ -4,12 +4,14 @@ Publico
 @endsection
 @section('content')
 
-
 <div class="card card-primary">
     <div class="card-header">
         <h4>Bienvenido al Sistema</h4>
     </div>
+    <div>
 
+    </div>
+    <input type="text" id="token" name="_token" value="{{ csrf_token() }}">
     <div class="card-body pt-1">
         <div class="row">
             <div class="col-md-12">
@@ -37,7 +39,7 @@ Publico
                 <div class="row">
                     <div class="col-md-6 mt-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <button type=" " id="btn_ingreso" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                 ENTRADA
                             </button>
                         </div>
@@ -55,7 +57,12 @@ Publico
     </div>
 </div>
 
-<script>
+<script src="{{ asset('js/jquery-1.12.0.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+
+
+
+<script type="text/javascript">
     function mostrarHora() {
         var fecha = new Date();
         var horas = fecha.getHours();
@@ -73,6 +80,34 @@ Publico
     }
     setInterval(mostrarHora, 1000);
     mostrarHora();
+
+    $("#btn_ingreso").click(function() {
+        var URL = "{{ route('guardar_campos_requerimiento') }}";
+        var token = '{{ csrf_token() }}';
+        var data = {
+            codigo: $('#codigo').val(),
+        };
+
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            success: function(response) {
+                if (response.status != 200) {
+                    toastr.error(response.mensaje);
+                } else {
+                    toastr.success(response.mensaje);
+                    window.location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                toastr.error("Error en la solicitud AJAX: " + error);
+            }
+        });
+    });
 </script>
 
 @endsection

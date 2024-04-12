@@ -7,7 +7,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SistemaTurnos\DependenciaController;
-
+use App\Http\Controllers\SistemaTurnos\AsistenciaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //y creamos un grupo de rutas protegidas para los controladores
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('blogs', BlogController::class);
@@ -39,4 +39,7 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 
+Route::post('/guardar_campos_requerimiento', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_ingreso'])->name('guardar_campos_requerimiento');
 
+
+//Route::group(['middleware' => ['auth', 'cache', 'password']], function () {});
