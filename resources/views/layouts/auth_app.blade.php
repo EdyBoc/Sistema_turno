@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('sources/toastr/css/toastr.min.css') }}" rel="stylesheet" type="text/css">
+    @yield('styles')
 </head>
 
 <body>
@@ -42,9 +44,10 @@
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
-
+<script src="{{ asset('sources/toastr/js/toastr.min.js') }}"></script>
 <!-- JS Libraies -->
 
+@yield('scripts')
 <!-- Template JS File -->
 <script src="{{ asset('web/js/stisla.js') }}"></script>
 <script src="{{ asset('web/js/scripts.js') }}"></script>

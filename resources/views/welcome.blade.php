@@ -2,6 +2,66 @@
 @section('title')
 Publico
 @endsection
+
+@section('styles')
+<style>
+ .loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #FFF #FFF transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent #FF3D00 #FF3D00;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: #FFF #FFF transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+      
+</style>
+@endsection
 @section('content')
 
 <div class="card card-primary">
@@ -11,8 +71,8 @@ Publico
     <div>
 
     </div>
-    <input type="text" id="token" name="_token" value="{{ csrf_token() }}">
-    <div class="card-body pt-1">
+    <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+       <div class="card-body pt-1">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -29,13 +89,16 @@ Publico
                         @endauth
                     </div>
                     @endif
-                    <div id="clock" class="text-center"></div>
+                    <h6 id="fecha" class="text-center"></h6>
+                    <div class="container d-flex justify-content-center align-items-center">
+                        <span class="loader" id="loader"></span>
+                      </div>
+                  
                 </div>
                 <div class="form-group">
                     <label for="lb_codigo">CODIGO</label>
                     <input type="password" class="form-control" id="codigo" name="codigo" placeholder="Ingrese su codigo">
                 </div>
-
                 <div class="row">
                     <div class="col-md-6 mt-4">
                         <div class="form-group">
@@ -57,31 +120,21 @@ Publico
     </div>
 </div>
 
-<script src="{{ asset('js/jquery-1.12.0.min.js') }}"></script>
-<script src="{{ asset('js/toastr.min.js') }}"></script>
+@endsection
+@section('scripts')
+<script>
+    setInterval(() => {
+        let fecha = new Date();
+        let fechaHora = fecha.toLocaleString();
+        document.getElementById("fecha").textContent = fechaHora;
+    }, 1000);
 
-
-
-<script type="text/javascript">
-    function mostrarHora() {
-        var fecha = new Date();
-        var horas = fecha.getHours();
-        var minutos = fecha.getMinutes();
-        var segundos = fecha.getSeconds();
-
-        // Formatear a dos dígitos si es necesario
-        horas = horas < 10 ? '0' + horas : horas;
-        minutos = minutos < 10 ? '0' + minutos : minutos;
-        segundos = segundos < 10 ? '0' + segundos : segundos;
-
-        var horaActual = horas + ':' + minutos + ':' + segundos;
-
-        document.getElementById('clock').innerHTML = horaActual;
-    }
-    setInterval(mostrarHora, 1000);
-    mostrarHora();
+    $(document).ready(function() {
+    $('#loader').hide();
+    });
 
     $("#btn_ingreso").click(function() {
+        $('#loader').show();
         var URL = "{{ route('guardar_campos_requerimiento') }}";
         var token = '{{ csrf_token() }}';
         var data = {
@@ -96,12 +149,16 @@ Publico
                 'X-CSRF-TOKEN': token
             },
             success: function(response) {
-                if (response.status != 200) {
-                    toastr.error(response.mensaje);
-                } else {
-                    toastr.success(response.mensaje);
-                    window.location.reload();
-                }
+                if (!response.success) { // Verifica si el campo "success" es falso
+                toastr.error(response.message);
+                $('#loader').hide();
+
+            } else {
+                toastr.success(response.message);
+                $('#loader').hide();
+                window.location.reload();
+                
+            }
             },
             error: function(xhr, status, error) {
                 toastr.error("Error en la solicitud AJAX: " + error);
@@ -109,5 +166,4 @@ Publico
         });
     });
 </script>
-
 @endsection

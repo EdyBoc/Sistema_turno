@@ -9,28 +9,33 @@ use Illuminate\Support\Facades\DB;
 use  Illuminate\Support\Facades\Session;
 
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-
-
 class AsistenciaController extends Controller
 {
 
     public function marcaje_ingreso(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            // Define validation rules for your data (id_profesion, catalogo_item, descripcion)
-        ]);
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'codigo' => 'required',
+            ],
+            [
+                'codigo.required' => 'Debe ingresar codigo',
+            ]
+        );
 
         if ($validator->fails()) {
-            return response()->json(['status' => 422, 'message' => $validator->errors()->first()]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error, ingrese su codigo',
+            ]);
         }
 
-        // Process the data received from AJAX request (e.g., save to database)
-
-        return response()->json(['status' => 200, 'message' => 'Data processed successfully!']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Se ha registrado su ingreso exitosamente',
+        ]);
     }
 
 
