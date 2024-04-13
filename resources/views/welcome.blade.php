@@ -5,60 +5,23 @@ Publico
 
 @section('styles')
 <style>
- .loader {
-  width: 48px;
-  height: 48px;
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
   border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  border: 3px solid;
-  border-color: #FFF #FFF transparent transparent;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  background: #25b09b;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
 }
-.loader::after,
-.loader::before {
-  content: '';  
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border: 3px solid;
-  border-color: transparent transparent #FF3D00 #FF3D00;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-sizing: border-box;
-  animation: rotationBack 0.5s linear infinite;
-  transform-origin: center center;
-}
-.loader::before {
-  width: 32px;
-  height: 32px;
-  border-color: #FFF #FFF transparent transparent;
-  animation: rotation 1.5s linear infinite;
-}
-    
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} 
-@keyframes rotationBack {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-
+@keyframes l3 {to{transform: rotate(1turn)}}
       
 </style>
 @endsection
@@ -91,7 +54,7 @@ Publico
                     @endif
                     <h6 id="fecha" class="text-center"></h6>
                     <div class="container d-flex justify-content-center align-items-center">
-                        <span class="loader" id="loader"></span>
+                        <div class="loader" id="loader" ></div>
                       </div>
                   
                 </div>
