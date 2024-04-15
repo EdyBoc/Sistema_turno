@@ -4,19 +4,18 @@
 
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Modulo de Asignaciones</h3>
+        <h3 class="page__heading">Módulo de catálogos</h3>
     </div>
     <div class="section-body">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a class="btn btn-warning" href=" "><i class="fas fa-street-view"></i>Asignar dependencia</a> 
-                        <a class="btn btn-warning" href=" "><i class="fas fa-business-time"></i>Asignar turno</a>
-                        <a class="btn btn-warning" href=" "><i class=" fas fa-user-lock"></i>Asignar rol</a>
-                        <a class="btn btn-warning" href=" "><i class="fas fa-plus-circle"></i> Nuevo</a>
-                        <a class="btn btn-success" id="btn_actualizar"><i class="fas fa-history"></i>Actualizar</a>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-layer-group"></i>Detalle</a>
+                        <a class="btn btn-warning" href="/dependencia"><i class="fas fa-street-view"></i> Nueva dependencia</a> 
+                        <a class="btn btn-warning" href=" "><i class="fas fa-business-time"></i> Nuevo turno</a>
+                        <a class="btn btn-warning" href="/roles"><i class=" fas fa-user-lock"></i> Nuevo rol</a>
+                        <a class="btn btn-success" id="btn_actualizar"><i class="fas fa-history"></i> Actualizar</a>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-layer-group"></i> Detalle</a>
                     </div>
                 </div>
             </div>
@@ -25,7 +24,7 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                  <p class="card-text">Bienvenido al modulo de asignaciones</p>
+                  <p class="card-text">Bienvenido al Módulo de catálogos</p>
                   <div class="sidebar-brand">
                     <img class="navbar-brand-full app-header-logo" src="{{ asset('img/config.jpg') }}" width="75"
                         alt="Infyom Logo">

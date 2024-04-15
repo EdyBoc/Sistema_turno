@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-        
+                        <a class="btn btn-danger" href="/index_catalogo"><i class="fas fa-reply"></i></i>Regrar</a> 
                         @can('crear-rol')
                         <a class="btn btn-warning" href="{{ route('roles.create') }}">Nuevo</a>                        
                         @endcan
