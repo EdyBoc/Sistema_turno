@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        /* Tus estilos CSS aquí */
+    </style>
+@endsection
 @section('content')
 
 <section class="section">
@@ -11,12 +16,21 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a class="btn btn-warning" href=" "><i class="fas fa-street-view"></i>Asignar dependencia</a> 
-                        <a class="btn btn-warning" href=" "><i class="fas fa-business-time"></i>Asignar turno</a>
-                        <a class="btn btn-warning" href=" "><i class=" fas fa-user-lock"></i>Asignar rol</a>
-                        <a class="btn btn-warning" href=" "><i class="fas fa-plus-circle"></i> Nuevo</a>
+                        <!-- Example split danger button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning">Nuevo</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item " href=" "><i class="fas fa-street-view"></i> Asignar Dependencia</a> 
+                                <a class="dropdown-item " href=" "><i class="fas fa-business-time"></i> Asignar Turno</a>
+                                <a class="dropdown-item " href=" "><i class="fas fa-user-lock"></i> Asignar Rol</a>
+                            </div>
+                        </div>
                         <a class="btn btn-success" id="btn_actualizar"><i class="fas fa-history"></i>Actualizar</a>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-layer-group"></i>Detalle</a>
+                        <a href="#" class="btn btn-primary" id="btn_detalle"><i class="fas fa-layer-group"></i>Detalle</a>
+                        <a class="btn btn-secondary" href=" "><i class="fas fa-plus-circle"></i> modelo de boton</a>  
                     </div>
                 </div>
             </div>
@@ -41,12 +55,10 @@
 @endsection
 @section('scripts')
 <script>
-
     $(document).ready(function() {
         $("#btn_actualizar").click(function() {
         location.reload();
+        });
     });
-    });
-
 </script>
 @endsection
