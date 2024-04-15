@@ -72,7 +72,7 @@ Publico
                     </div>
                     <div class="col-md-6 mt-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <button type="" id="btn_salida" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                 SALIDA
                             </button>
                         </div>
@@ -99,6 +99,38 @@ Publico
     $("#btn_ingreso").click(function() {
         $('#loader').show();
         var URL = "{{ route('guardar_campos_requerimiento') }}";
+        var token = '{{ csrf_token() }}';
+        var data = {
+            codigo: $('#codigo').val(),
+        };
+
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            success: function(response) {
+                if (!response.success) { // Verifica si el campo "success" es falso
+                toastr.error(response.message);
+                $('#loader').hide();
+
+            } else {
+                toastr.success(response.message);
+                $('#loader').hide();
+                window.location.reload();
+                
+            }
+            },
+            error: function(xhr, status, error) {
+                toastr.error("Error en la solicitud AJAX: " + error);
+            }
+        });
+    });
+    $("#btn_salida").click(function() {
+        $('#loader').show();
+        var URL = "{{ route('guardar_campos_salida') }}";
         var token = '{{ csrf_token() }}';
         var data = {
             codigo: $('#codigo').val(),

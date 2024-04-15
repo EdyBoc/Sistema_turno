@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SistemaTurnos\DependenciaController;
 use App\Http\Controllers\SistemaTurnos\AsistenciaController;
+use App\Http\Controllers\SistemaTurnos\AsignacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::post('/guardar_campos_requerimiento', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_ingreso'])->name('guardar_campos_requerimiento');
+Route::post('/guardar_campos_salida', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_salida'])->name('guardar_campos_salida');
 
-
-//Route::group(['middleware' => ['auth', 'cache', 'password']], function () {});
+Route::get('/index_asignacion', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'asignacion'])->name('index');

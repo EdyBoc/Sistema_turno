@@ -34,7 +34,33 @@ class AsistenciaController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Se ha registrado su ingreso exitosamente',
+            'message' => 'Se ha registrado su ingreso, Bienvenido',
+        ]);
+    }
+
+    public function marcaje_salida(Request $request)
+    {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'codigo' => 'required',
+            ],
+            [
+                'codigo.required' => 'Debe ingresar codigo',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error, ingrese su codigo',
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Se ha registrado su salida',
         ]);
     }
 

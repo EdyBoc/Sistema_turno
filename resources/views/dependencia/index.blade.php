@@ -12,11 +12,10 @@
                 <div class="card">
                     <div class="card-body">
 
-
+                        <a class="btn btn-danger" href="/index_asignacion"><i class="fas fa-reply"></i></i>Regrar</a> 
                         @can('crear-dependencia')
                         <a class="btn btn-warning" href="{{ route('dependencia.create') }}">Nuevo</a>
                         @endcan
-
                         <table class="table table-striped mt-2">
                             <thead style="background-color:#6777ef">
                                 <th style="color:#fff;">Dependencia</th>
