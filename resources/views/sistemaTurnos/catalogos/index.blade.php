@@ -11,9 +11,9 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a class="btn btn-warning" href="/lista_catalogo"><i class="fas fa-street-view"></i>Crear Catalogo</a> 
-                        <a class="btn btn-warning" href="/roles"><i class=" fas fa-user-lock"></i> Nuevo rol</a>
-                        <a class="btn btn-success" id="btn_actualizar"><i class="fas fa-history"></i> Actualizar</a>
+                        <a class="btn btn-primary" href="/lista_catalogo"><i class="fas fa-street-view"></i>Catalogos</a> 
+                        <a class="btn btn-primary" href="/roles"><i class=" fas fa-user-lock"></i>Catalogo roles</a>
+                        <a class="btn btn-primary" id="btn_actualizar"><i class="fas fa-history"></i> Actualizar</a>
                         <a href="#" class="btn btn-primary"><i class="fas fa-layer-group"></i> Detalle</a>
                     </div>
                 </div>

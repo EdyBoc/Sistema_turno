@@ -10,6 +10,7 @@ use App\Http\Controllers\SistemaTurnos\DependenciaController;
 use App\Http\Controllers\SistemaTurnos\AsistenciaController;
 use App\Http\Controllers\SistemaTurnos\AsignacionController;
 use App\Http\Controllers\SistemaTurnos\CatalogoController;
+use App\Http\Controllers\SistemaTurnos\VacacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,3 +50,6 @@ Route::get('/index_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoContro
 Route::get('/lista_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'lista_catalogo'])->name('lista_catalogo');
 Route::post('/listar', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'listar'])->name('listar');
 Route::get('/crear', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'crear'])->name('crear');
+//Vacaciones
+Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'vista'])->name('index_vacaciones');
+Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
