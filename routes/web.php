@@ -46,3 +46,6 @@ Route::post('/guardar_campos_salida', [App\Http\Controllers\SistemaTurnos\Asiste
 //asingaciones
 Route::get('/index_asignacion', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'asignacion'])->name('index');
 Route::get('/index_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'catalogo'])->name('index');
+Route::get('/lista_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'lista_catalogo'])->name('lista_catalogo');
+Route::post('/listar', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'listar'])->name('listar');
+Route::get('/crear', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'crear'])->name('crear');
