@@ -6,6 +6,7 @@ namespace App\Http\Controllers\SistemaTurnos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\baseModel;
+use App\Models\SistemaTurnos\Persona;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Validator;
@@ -36,6 +37,11 @@ class VacacionController extends Controller
         }, range(1, 30));
 
         $this->pageData['dias'] = $dias;
+
+        $persona = Persona::pluck('nombre_completo', 'id_persona');
+
+        $this->pageData['persona'] = $persona;
+
         return view('sistemaTurnos.vacacion.crear_vacaciones', $this->pageData);
     }
 }

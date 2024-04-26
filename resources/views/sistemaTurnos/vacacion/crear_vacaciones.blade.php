@@ -10,21 +10,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body"> 
+                    <div class="card-body">
+                        <div class="justify-content-center text-center">
                         <a class="btn btn-danger btn-lg" href="/index_vacaciones"><i class="fa fa-times"></i>Cancelar</a> 
                         <a class="btn btn-primary btn-lg" id="btn_actualizar"><i class="fas fa-history"></i> Actualizar</a>
                         <a class="btn btn-primary btn-lg" id="btn_consultar"> Consultar</a>
+                        </div>
                         <div class="row mt-1">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleSelect">Selecciona Trabajador:</label>
-                                    <select class="form-control" id="exampleSelect">
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
-                                        <option>Option 4</option>
-                                        <option>Option 5</option>
-                                    </select>
+                                    {{ Form::select('persona', @$persona, null, ['id' => 'persona', 'class' => 'form-control ']) }}
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -35,8 +31,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="container ">
-                                <label for="">Formulario de Autorizacion</label>
+                                 <label for="">Formulario de Autorizacion</label>
                                     <details class="col-lg-12">
                                       <summary>Detalles</summary>
                                       <div class="row">
@@ -95,7 +90,7 @@
                                    
 
                                     </details>
-                                  </div>
+                                 
                         </div>
                     </div>
                 </div>
