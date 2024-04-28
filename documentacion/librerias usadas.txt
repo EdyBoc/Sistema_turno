@@ -1,3 +1,9 @@
 * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
+
+
+ actualizacion de migraciones
+ php artisan migrate:refresh
+ php artisan migrate:fresh
+ php artisan migrate

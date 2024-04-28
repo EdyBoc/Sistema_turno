@@ -81,8 +81,8 @@ CREATE TABLE asignacion_turno (
     ip VARCHAR(15) 
     );
 
-    CREATE TABLE asignacion_rol (
-    id_asignacion_rol INT PRIMARY KEY AUTO_INCREMENT,
+    CREATE TABLE roles (
+    id_roles INT PRIMARY KEY AUTO_INCREMENT,
     id_catalogo_rol INT NOT NULL,
     id_usuario INT NOT NULL,
     fecha_control DATETIME NOT NULL,
@@ -91,8 +91,8 @@ CREATE TABLE asignacion_turno (
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
-    CONSTRAINT FK_asignacion_rol_catalogo_rol FOREIGN KEY (id_catalogo_rol) REFERENCES catalogo_rol(id_catalogo_rol),
-    CONSTRAINT FK_asignacion_rol_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_catalogo_rol) REFERENCES catalogo_rol(id_catalogo_rol),
+    FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
 
@@ -140,3 +140,58 @@ CREATE TABLE asignacion_turno (
     ip VARCHAR(15) ,
     FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
     );
+
+
+
+CREATE TABLE users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255),
+email VARCHAR(255) UNIQUE,
+estado TINYINT(1) DEFAULT 1,
+email_verified_at TIMESTAMP NULL,
+password VARCHAR(255),
+remember_token VARCHAR(100),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE password_resets (
+    email VARCHAR(255),
+    token VARCHAR(255),
+    created_at TIMESTAMP NULL
+);
+
+CREATE INDEX email_index ON password_resets (email);
+
+
+CREATE TABLE personal_access_tokens (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    tokenable_id BIGINT UNSIGNED,
+    tokenable_type VARCHAR(255),
+    name VARCHAR(255),
+    token VARCHAR(64) UNIQUE,
+    abilities TEXT,
+    last_used_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (tokenable_id) REFERENCES <nombre_de_la_tabla_polimórfica>(id)
+) ENGINE=InnoDB;
+
+
+
+CREATE VIEW vw_usuarios AS
+SELECT
+    pers.id,
+    pers.name,
+    pers.email,
+    rol.id_catalogo_rol,
+    cr.nombre AS nombre_rol,
+    rol.estado
+FROM 
+    users pers
+LEFT JOIN 
+    roles rol ON pers.id = rol.id_usuario
+LEFT JOIN 
+    catalogo_rol cr ON rol.id_catalogo_rol = cr.id_catalogo_rol;

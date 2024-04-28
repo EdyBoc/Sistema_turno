@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 //agregamos los siguientes controladores
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SistemaTurnos\DependenciaController;
 use App\Http\Controllers\SistemaTurnos\AsistenciaController;
 use App\Http\Controllers\SistemaTurnos\AsignacionController;
@@ -13,7 +11,7 @@ use App\Http\Controllers\SistemaTurnos\CatalogoController;
 use App\Http\Controllers\SistemaTurnos\VacacionController;
 use App\Http\Controllers\SistemaTurnos\rrhhController;
 use App\Http\Controllers\SistemaTurnos\ReporteriaController;
-
+use App\Http\Controllers\SistemaTurnos\UsuariosController;
 
 
 
@@ -42,12 +40,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //y creamos un grupo de rutas protegidas para los controladores
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
-    Route::resource('usuarios', UsuarioController::class);
-    Route::resource('blogs', BlogController::class);
     Route::resource('dependencia', DependenciaController::class);
 });
+//usuarios
+Route::get('/index_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'usuarios'])->name('index');
+Route::post('/listar_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'listar_usuarios'])->name('listar_usuarios');
+Route::get('/asignacion_roles/{id?}', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'asignacion_rol'])->name('detalle_rol_asignacion');
 
 
+
+//marcaje usuario
 Route::post('/guardar_campos_requerimiento', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_ingreso'])->name('guardar_campos_requerimiento');
 Route::post('/guardar_campos_salida', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_salida'])->name('guardar_campos_salida');
 //asingaciones

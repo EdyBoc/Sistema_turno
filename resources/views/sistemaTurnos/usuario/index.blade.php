@@ -14,21 +14,15 @@
                             <div class="col-lg-12">
                                 <table class="table table-bordered table-striped" id="listadoTabla" cellspacing="0"
                                     style="font-size: 12px;">
-                                    <thead style="background-color:#6777ef">
-                                        <th style="display: none;">ID</th>
-                                        <th style="color:#fff;">Nombre</th>
-                                        <th style="color:#fff;">E-mail</th>
-                                        <th style="color:#fff;">Rol</th>
-                                        <th style="color:#fff;">Acciones</th>
+                                    <thead>
+                                        <th style="text-align: center;"> No. </th>
+                                        <th style="text-align: center;"> Nombre </th>
+                                        <th style="text-align: center;"> Email </th>
+                                        <th style="text-align: center;"> Rol </th>
+                                         <th style="text-align: center;"> Estado </th>
+                                        <th style="text-align: center;" width="60"> Acciones</th>
                                     </thead>
                                 </table>
-
-                                <a class="btn btn-warning" href="">Nuevo</a>
-
-                                <!-- Centramos la paginacion a la derecha -->
-                                <div class="pagination justify-content-end">
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -38,6 +32,12 @@
 @endsection
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            $("#btn_actualizar").click(function() {
+                location.reload();
+            });
+        });
+
         $('#avanzado').on('change keyup', function(e) {
             var keyCode = e.keyCode || e.which;
             if ((keyCode == 13)) {
@@ -63,7 +63,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('listar') }}",
+                url: "{{ route('listar_usuarios') }}",
                 type: 'POST',
                 data: function(d) {
                     d.avanzado = $("#avanzado").val();
