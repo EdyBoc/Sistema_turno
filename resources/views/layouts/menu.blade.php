@@ -18,7 +18,7 @@
     <a class="nav-link" href="/index_vacaciones">
         <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
     </a>
-    <a class="nav-link" href=" ">
+    <a class="nav-link" href="/index_reporte">
         <i class="fas fa-chart-pie"></i><span>Reporteria</span>
     </a>
      <!-- módulo Recursos Humanos -->

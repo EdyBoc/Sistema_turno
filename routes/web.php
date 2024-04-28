@@ -12,6 +12,11 @@ use App\Http\Controllers\SistemaTurnos\AsignacionController;
 use App\Http\Controllers\SistemaTurnos\CatalogoController;
 use App\Http\Controllers\SistemaTurnos\VacacionController;
 use App\Http\Controllers\SistemaTurnos\rrhhController;
+use App\Http\Controllers\SistemaTurnos\ReporteriaController;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,3 +61,5 @@ Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionCont
 Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
 //Recursos Humanos
 Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'listar'])->name('index_listar');
+//Reporteria
+Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');
