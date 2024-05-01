@@ -10,13 +10,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-
-
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <label for="nombre">Seleccione autizacion:</label>
-                                        <input type="text" class="form-control" id="descripcion_catalogo">
+                                        {{ Form::select('rol', @$rol, isset($usuario) ? $usuario->rol : null, ['id' => 'id_renglon', 'class' => 'form-control ', 'class' => 'form-control select-estilo', 'placeholder' => 'Seleccione...']) }}
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre">Nombre completo:</label>
@@ -32,9 +30,8 @@
                                             value="{{ isset($usuario) ? $usuario->email : null }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="nombre">Estado:</label>
-                                        <input type="text" class="form-control" id="estado"
-                                            value="{{ isset($usuario) ? $usuario->estado : null }}">
+                                        <label for="nombre">Estado asignado:</label>
+                                        {{ Form::select('estado', @$estado, isset($usuario) ? $usuario->estado : null, ['id' => 'id_renglon', 'class' => 'form-control ', 'class' => 'form-control select-estilo', 'placeholder' => 'Seleccione...']) }}
                                     </div>
                                 </div>
                             </div>

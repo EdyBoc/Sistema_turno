@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 col-xl-4">
-                                    <div class="card bg-c-blue order-card">
+                                    <div class="card bg-c-bla order-card">
                                         <div class="card-block">
                                             <h5>Usuarios</h5>
 
@@ -87,7 +87,7 @@
                 backgroundColor: 'black'
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
 
             chart.draw(data, options);
         }

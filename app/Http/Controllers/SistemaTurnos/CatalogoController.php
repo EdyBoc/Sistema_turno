@@ -6,11 +6,12 @@ namespace App\Http\Controllers\SistemaTurnos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\baseModel;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use App\Models\SistemaTurnos\Catalogo;
 use App\Models\SistemaTurnos\Catalogo_items;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Validator;
 use Response;
 use Storage;
 use View;
@@ -38,10 +39,12 @@ class CatalogoController extends Controller
             false => 'Inactivo'
         ];
 
-        $catalogo = Catalogo::get();
-
-
         $this->pageData['estado'] = $estado;
+
+        $catalogo = Catalogo::pluck('nombre', 'id_catalogo');
+
+        $this->pageData['catalogo'] = $catalogo;
+
 
         return view('sistemaTurnos.catalogos.catalogo.lista_catalogo', $this->pageData);
     }
@@ -60,7 +63,6 @@ class CatalogoController extends Controller
         $tableCols = array(
             'No.',
             'Item',
-            'Descripción',
             'Estado',
         );
 
@@ -78,7 +80,6 @@ class CatalogoController extends Controller
         $columns = [
             'No.',
             'Item',
-            'Descripción',
             'Estado',
         ];
 
@@ -155,8 +156,41 @@ class CatalogoController extends Controller
         return response()->json($response);
     }
 
-    public function crear(Request $request)
+    public function guardar_catalogo(Request $request)
     {
-        return view('sistemaTurnos.catalogos.catalogo.crear');
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre' => 'required',
+            ],
+            [
+                'nombre.required' => 'Debe ingresar nombre',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Debe ingresar un nombre valido de catalogo',
+            ]);
+        }
+
+        $fh_catalogo = Carbon::now();
+        $fn_ingreso = Carbon::now();
+        $ip = $request->ip();
+        $user = $request->user()->name;
+
+        $catalogo = new Catalogo();
+        $catalogo->nombre = $request->nombre;
+        $catalogo->fh_catalogo = $fh_catalogo;
+        $catalogo->user = $user;
+        $catalogo->fn_ingreso = $fn_ingreso;
+        $catalogo->ip = $ip;
+        if ($catalogo->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha registrado su ingreso, Bienvenido',
+            ]);
+        }
     }
 }

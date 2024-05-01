@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\baseModel;
 use App\Models\SistemaTurnos\Vw_usuarios;
+use App\Models\SistemaTurnos\Catalogo_rol;
 use App\Models\User;
 use Carbon\Carbon;
 use Validator;
@@ -137,7 +138,6 @@ class UsuariosController extends Controller
     {
 
         $usuario = Vw_usuarios::where('id', $id)->first();
-
         $this->pageData['usuario'] = $usuario;
 
 
@@ -145,8 +145,11 @@ class UsuariosController extends Controller
             true => 'Activo',
             false => 'Inactivo'
         ];
-
         $this->pageData['estado'] = $estado;
+
+        $rol = Catalogo_rol::pluck('nombre', 'id_catalogo_rol');
+
+        $this->pageData['rol'] = $rol;
 
         return view('sistemaTurnos.usuario.detalle_rol_asignacion', $this->pageData);
     }

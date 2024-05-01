@@ -12,7 +12,7 @@ use App\Http\Controllers\SistemaTurnos\VacacionController;
 use App\Http\Controllers\SistemaTurnos\rrhhController;
 use App\Http\Controllers\SistemaTurnos\ReporteriaController;
 use App\Http\Controllers\SistemaTurnos\UsuariosController;
-
+use App\Http\Controllers\SistemaTurnos\CatalogoRolController;
 
 
 /*
@@ -46,7 +46,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/index_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'usuarios'])->name('index');
 Route::post('/listar_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'listar_usuarios'])->name('listar_usuarios');
 Route::get('/asignacion_roles/{id?}', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'asignacion_rol'])->name('detalle_rol_asignacion');
-
+//catalogo de roles
+Route::get('/index_catalogo_rol', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'vista'])->name('index');
+Route::post('/listar_roles', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'listar'])->name('listar_roles');
 
 
 //marcaje usuario
@@ -57,7 +59,7 @@ Route::get('/index_asignacion', [App\Http\Controllers\SistemaTurnos\AsignacionCo
 Route::get('/index_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'catalogo'])->name('index');
 Route::get('/lista_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'lista_catalogo'])->name('lista_catalogo');
 Route::post('/listar', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'listar'])->name('listar');
-Route::get('/crear', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'crear'])->name('crear');
+Route::post('/guardar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'guardar_catalogo'])->name('guardar_catalogo');
 //Vacaciones
 Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'vista'])->name('index_vacaciones');
 Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
