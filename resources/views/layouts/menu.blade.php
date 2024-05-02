@@ -9,18 +9,20 @@
         <i class="fas fa-users-cog"></i><span>Usuarios</span>
     </a>
 
+    <a class="nav-link" href="/index_asignacion">
+        <i class="fas fa-clipboard-list"></i><span>Asignaciones</span>
+    </a>
+    <a class="nav-link" href="/index_vacaciones">
+        <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
+    </a>
+
     @isset($rol_usuario)
         @if ($rol_usuario == 'admin' || $rol_usuario == 'coordinador')
             <!-- Enlaces para admin o coordinador -->
 
             @if ($rol_usuario == 'coordinador')
                 <!-- Enlaces adicionales para coordinador -->
-                <a class="nav-link" href="/index_asignacion">
-                    <i class="fas fa-clipboard-list"></i><span>Asignaciones</span>
-                </a>
-                <a class="nav-link" href="/index_vacaciones">
-                    <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
-                </a>
+
                 <a class="nav-link" href="/index_reporte">
                     <i class="fas fa-chart-pie"></i><span>Reporteria</span>
                 </a>

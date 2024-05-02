@@ -49,7 +49,8 @@
 
                                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                     <div class="input-group">
-                                        {{ Form::select('catalogo', @$catalogo, null, ['id' => 'id_catalogo', 'class' => 'form-control ']) }}
+                                        {{ Form::select('catalogo', @$catalogo, null, ['id' => 'id_catalogo', 'class' => 'form-control ', 'placeholder' => 'Seleccione...']) }}
+
                                         <a class="btn btn-primary" type="button" data-toggle="modal"
                                             data-target="#modal_add_catalogo_editar" data-toggle="tooltip" title="Buscar">
                                             <i class="fas fa-edit"></i>
@@ -163,37 +164,16 @@
 
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="catalogo_items_nombre">
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="fr_catalogo_nombre">Hora Inicio:</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" data-toggle="tooltip" title="Inicio">AM
-                                            <i class="fas fa-clock"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="fr_catalogo_nombre">Hora fin:</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" data-toggle="tooltip" title="Fin">PM
-                                            <i class="fas fa-clock"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a id="btnCerrar" onclick="$('#modal_add_catalogo_items').modal('hide');"
