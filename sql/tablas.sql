@@ -42,7 +42,7 @@ CREATE TABLE asignacion_turno (
     CONSTRAINT FK_asignacion_dependencia_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
     );
 
-
+--Esta tabla es funcional
     CREATE TABLE Persona (
     id_persona INT PRIMARY KEY AUTO_INCREMENT,
     cui VARCHAR(36) NOT NULL UNIQUE,
@@ -58,7 +58,7 @@ CREATE TABLE asignacion_turno (
     ip VARCHAR(15)
     );
 
-
+--Esta tabla es funcional
     CREATE TABLE Vacacion (
     id_vacacion INT PRIMARY KEY AUTO_INCREMENT,
     id_persona INT NOT NULL,

@@ -9,7 +9,7 @@ use App\Http\Controllers\SistemaTurnos\AsistenciaController;
 use App\Http\Controllers\SistemaTurnos\AsignacionController;
 use App\Http\Controllers\SistemaTurnos\CatalogoController;
 use App\Http\Controllers\SistemaTurnos\VacacionController;
-use App\Http\Controllers\SistemaTurnos\rrhhController;
+use App\Http\Controllers\SistemaTurnos\RrhhController;
 use App\Http\Controllers\SistemaTurnos\ReporteriaController;
 use App\Http\Controllers\SistemaTurnos\UsuariosController;
 use App\Http\Controllers\SistemaTurnos\CatalogoRolController;
@@ -63,7 +63,8 @@ Route::post('/guardar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoCon
 //Vacaciones
 Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'vista'])->name('index_vacaciones');
 Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
+Route::get('/filtar_persona', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'filtar_datos_persona'])->name('filtar_persona');
 //Recursos Humanos
-Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'listar'])->name('index_listar');
+Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'listar'])->name('index_listar');
 //Reporteria
 Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');

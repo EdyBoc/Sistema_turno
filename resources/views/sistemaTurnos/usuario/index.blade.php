@@ -1,9 +1,41 @@
 @extends('layouts.app')
 
+@section('page_css')
+    <style>
+        .table thead th {
+            background-color: #6b6e86;
+            color: rgb(255, 255, 255);
+            /* Color de fondo azul claro */
+        }
+
+        /* Estilo para la tabla */
+        .table {
+            border-collapse: separate;
+            width: 100%;
+            border-radius: 10px;
+            /* Borde redondeado para la tabla */
+            overflow: hidden;
+            /* Para que los bordes redondeados se vean correctamente */
+        }
+
+        /* Estilo para las celdas de la tabla */
+        .table th,
+        .table td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            /* Ajuste el espaciado de las celdas aquí */
+        }
+
+        /* Estilo para las filas impares */
+        .table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+            color: black;
+        }
+    </style>
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Usuarios</h3>
+            <h3 class="page__heading">Módulo de Usuarios</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -19,7 +51,7 @@
                                         <th style="text-align: center;"> Nombre </th>
                                         <th style="text-align: center;"> Email </th>
                                         <th style="text-align: center;"> Rol </th>
-                                         <th style="text-align: center;"> Estado </th>
+                                        <th style="text-align: center;"> Estado </th>
                                         <th style="text-align: center;" width="60"> Acciones</th>
                                     </thead>
                                 </table>
@@ -58,7 +90,31 @@
                 orderable: false,
                 targets: "_all"
             }],
+            lengthMenu: [
+                [4, -1],
+                [4, "All"]
+            ],
             order: [0, 'desc'],
+            language: {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en la tabla",
+                "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
+                "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+                "sSearch": "Buscar:",
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente",
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "oPaginate": {
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente"
+                },
+                "sSortAsc": "Ordenar ascendente",
+                "sSortDesc": "Ordenar descendente"
+            },
             bFilter: false,
             processing: true,
             serverSide: true,

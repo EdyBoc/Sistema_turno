@@ -16,6 +16,10 @@
         <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
     </a>
 
+    <a class="nav-link" href="index_listar">
+        <i class="fas fa-paperclip"></i><span>RRHH</span>
+    </a>
+
     @isset($rol_usuario)
         @if ($rol_usuario == 'admin' || $rol_usuario == 'coordinador')
             <!-- Enlaces para admin o coordinador -->
@@ -31,9 +35,6 @@
 
         @if ($rol_usuario == 'recursos_humanos')
             <!-- Enlaces para recursos humanos -->
-            <a class="nav-link" href="#">
-                <i class="fas fa-paperclip"></i><span>RRHH</span>
-            </a>
         @endif
 
         @if ($rol_usuario == 'recursos_nomina')
