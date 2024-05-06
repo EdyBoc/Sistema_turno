@@ -54,7 +54,6 @@ class VacacionController extends Controller
 
         $id_persona = $request->input('persona');
         $persona = Persona::find($id_persona);
-
         $cui = $persona->cui;
         $correo_electronico = $persona->correo_electronico;
         $fecha_nacimiento = Carbon::createFromFormat('Y-m-d', $persona->fh_nacimiento);

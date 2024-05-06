@@ -95,7 +95,7 @@ CREATE TABLE asignacion_turno (
     id_catalogo INT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT true,
-    fh_control DATETIME NOT NULL,
+    fh_catalogo_items DATETIME NOT NULL,
     fn_ingreso datetime ,
     user varchar(191),
     fn_ultima_modificacion datetime ,

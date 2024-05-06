@@ -50,111 +50,34 @@ class CatalogoController extends Controller
     }
 
 
-    public function listar(request $request)
+    public function listar(Request $request)
     {
-        //DataTable contador de renderizacion
-        $dataTablesResponse['draw'] = intval($request->draw);
 
-        //obtengo datos de paginacion
-        $limit = ($request->length != '') ? $request->length : false;
-        $offset = $request->start;
-        $order = $request->order;
+        $existentes = Catalogo::find($request->id_catalogo);
 
-        $tableCols = array(
-            'No.',
-            'Item',
-            'Estado',
-        );
-
-        //limit
-        if (!$limit) {
-            $limit = config('constantes.datatableDefaultRows');
-        }
-
-        //offset
-        if (!$offset) {
-            $offset = 0;
-        }
-
-        // DEFINO LAS COLUMNAS QUE FORMARN EL LISTADO
-        $columns = [
-            'No.',
-            'Item',
-            'Estado',
-        ];
+        if ($existentes) {
+            $catalogo_items = Catalogo_items:: //where('esta_activo', true)
+                select('id_catalogo_item', 'id_catalogo', 'nombre', 'estado', 'fh_catalogo_items')
+                ->where('id_catalogo', $request->id_catalogo)
+                ->orderBy('fh_catalogo_items', 'DESC')
+                ->get();
 
 
-        if (isset($request->estado) && $request->estado !== '') {
-            $query = Catalogo_items::query()->where('esta_activo', filter_var($request->estado, FILTER_VALIDATE_BOOLEAN));
-        } else {
-
-            $query = Catalogo_items::query();
-        }
-
-        // Verificar si se proporciona un avanzado de búsqueda
-        if (isset($request->avanzado) && $request->avanzado != '') {
-            // Aplicar la condición de búsqueda si se proporciona un avanzado
-            $query->where(function ($query) use ($request) {
-                $avanzado = $request->avanzado;
-                $query->where('nombre', 'like', "%$avanzado%")
-                    ->orWhere('descripcion', 'like', "%$avanzado%");
+            $data = $catalogo_items->map(function ($item) {
+                return [
+                    'id_catalogo_item' => $item->id_catalogo_item,
+                    'nombre' => $item->nombre,
+                    'estado' => $item->estado ? 'activo' : 'inactivo',
+                    'fh_catalogo_items' => $item->fh_catalogo_items,
+                ];
             });
+            return response()->json($data, 200);
+        } else {
+            $data = ['mensaje' => 'Seleccione un Catalogo.'];
+            return response()->json($data, 200);
         }
-
-        // Obtener los resultados
-        $registros = $query->orderBy('nombre', 'desc')->get();
-
-        // OBTENGO EL TOTAL DE REGISTROS INCLUIDOS EN LA LISTA=
-        $total = $registros->count();
-
-        // CONSTRUYO LA LISTA EN FORMATO HTML
-        $results = [];
-
-        if ($offset != 0) {
-            $fila = $offset + 1;
-        }
-
-        $contador = ($offset > 0) ? $offset + 1 : 1;
-        foreach ($registros as $registro => $item) {
-
-
-            $linkEditar = '<a
-                    title="Editar "
-                    data-toggle="tooltip"
-                    data-original-title="Prioridad"
-                    class="btnUPD"
-                    href="#"
-                    onclick="modalEditarCatalogo(' . strval($item->id_catalogo) . ')"
-                    > <i class="fas fa-edit listaIcon"></i></a>';
-
-
-            $descripcion = $item->descripcion;
-            $nombre = $item->nombre;
-            $estado = $item->estado;
-
-            if ($estado == true) {
-                $estado_texto = "Activo";
-            } else {
-                $estado_texto = "Inactivo";
-            }
-            $results[] = [
-                '<div style="text-align:center;" class="orden">' . $contador . '</div>',
-                '<div style="text-align:center;" class="orden">' . $nombre . '</div>',
-                '<div style="text-align:center;" class="orden">' . $descripcion . '</div>',
-                '<div style="text-align:center;" class="orden">' . $estado_texto . '</div>',
-                '<div style="text-align:center; width:100%;">' . $linkEditar . '</div>'
-
-            ];
-            $contador++;
-        }
-        $response = [
-            'data' => $results,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $total,
-        ];
-
-        return response()->json($response);
     }
+
 
     public function guardar_catalogo(Request $request)
     {
@@ -190,6 +113,30 @@ class CatalogoController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Se ha registrado su ingreso, Bienvenido',
+            ]);
+        }
+    }
+
+    public function inactivar_catalogo_items(Request $request)
+    {
+        $catalogo_items = Catalogo_items::find($request->id_catalogo_item);
+        if ($catalogo_items) {
+            $catalogo_items->estado = !$catalogo_items->estado;
+            if ($catalogo_items->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'El estado del  catalogo ítem se ha actualizado correctamente.',
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error al actualizar el estado',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se puede cambiar de estado.',
             ]);
         }
     }
