@@ -14,7 +14,7 @@
                                 <div class="form-group">
                                     <a class="btn btn-primary" href="/lista_catalogo"><i
                                             class="fas fa-street-view"></i>Catalogos</a>
-                                    <a class="btn btn-primary" href="/index_catalogo_rol"><i
+                                    <a class="btn btn-primary" href="/index_catalogo_roles"><i
                                             class=" fas fa-user-lock"></i>Catalogo
                                         roles</a>
                                     <a class="btn btn-primary" id="btn_actualizar"><i class="fas fa-history"></i>

@@ -31,6 +31,14 @@
             background-color: #ffffff;
             color: black;
         }
+
+        /* Estilo para la fila de detalles */
+        .detalles {
+            background-color: #ffffff;
+            /* Color de fondo */
+            border-radius: 10px;
+            /* Borde redondeado para la fila de detalles */
+        }
     </style>
 @section('content')
     <section class="section">
@@ -42,10 +50,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-
-                            <div class="col-lg-12">
-                                <table class="table table-bordered table-striped" id="listadoTabla" cellspacing="0"
-                                    style="font-size: 12px;">
+                            <div class="table-responsive">
+                                <table class="table table-sm" id="listadoTabla" cellspacing="0" style="font-size: 80%;">
                                     <thead>
                                         <th style="text-align: center;"> No. </th>
                                         <th style="text-align: center;"> Nombre </th>
@@ -60,6 +66,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 @endsection
 @section('scripts')

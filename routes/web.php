@@ -58,6 +58,10 @@ Route::get('/lista_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoContro
 Route::post('/listar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'listar'])->name('listar_catalogo');
 Route::post('/guardar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'guardar_catalogo'])->name('guardar_catalogo');
 Route::post('/inactivar_catalogo_items/{id?}', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'inactivar_catalogo_items'])->name('inactivar_catalogo_items');
+//Catalogos Roles
+Route::get('/index_catalogo_roles', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'vista'])->name('index_catalogo_roles');
+
+
 //Vacaciones
 Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'vista'])->name('index_vacaciones');
 Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
