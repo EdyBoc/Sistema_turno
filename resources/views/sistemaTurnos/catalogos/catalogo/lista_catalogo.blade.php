@@ -386,16 +386,27 @@
                 fila.append($('<td>').text(item.nombre));
                 fila.append($('<td>').text(item.fh_catalogo_items));
                 fila.append($('<td>').text(item.estado));
-                fila.append($('<td align=center>').html(
-                    '<a title="Inactivar" data-toggle="tooltip" href="#" onclick="inactivarCatalogoItem(' +
-                    item.id_catalogo_item + ')">' +
-                    '<i class="fas fa-exclamation-circle"></i>' +
-                    '</a>' +
-                    '<a title="Editar" data-toggle="tooltip" href="#" onclick="modalEditarItems(' + item
-                    .id_catalogo_item + ', \'' + item.nombre + '\')">' +
-                    '<i class="fas fa-edit"></i>' +
-                    '</a>'
-                ));
+
+                if (item.estado === 'activo') {
+                    fila.append($('<td align=center>').html(
+                        '<a title="Inactivar" data-toggle="tooltip" href="#" onclick="inactivarCatalogoItem(' +
+                        item.id_catalogo_item + ')">' +
+                        '<i class="fas fa-exclamation-circle"></i>' +
+                        '</a>' +
+                        '<a title="Editar" data-toggle="tooltip" href="#" onclick="modalEditarItems(' + item
+                        .id_catalogo_item + ', \'' + item.nombre + '\')">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</a>'
+                    ));
+                } else {
+                    fila.append($('<td align=center>').html(
+                        '<a title="Activar" data-toggle="tooltip" href="#" onclick="inactivarCatalogoItem(' +
+                        item.id_catalogo_item + ')">' +
+                        '<i class="fas fa-check-circle"></i>' +
+                        '</a>'
+                    ));
+                }
+
                 // Agrega la fila a la tabla
                 tabla.append(fila);
                 contador++;
