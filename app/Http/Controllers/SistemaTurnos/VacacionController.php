@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SistemaTurnos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Encryption\Encrypter;
 use App\Models\baseModel;
 use App\Models\SistemaTurnos\Persona;
 use App\Models\SistemaTurnos\Vacacion;
@@ -31,7 +32,9 @@ class VacacionController extends Controller
 
         $vacacion['vacaciones'] = Vacacion::all();
 
-        return view('sistemaTurnos.vacacion.index_vacaciones', $vacacion);
+        $numSolicitudesPendientes['numSolicitudesPendientes'] = rand(0, 10);
+
+        return view('sistemaTurnos.vacacion.index_vacaciones', $vacacion, $numSolicitudesPendientes);
     }
 
     public function crear_vacaciones(Request $request)

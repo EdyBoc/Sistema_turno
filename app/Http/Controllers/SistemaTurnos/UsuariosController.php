@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SistemaTurnos;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Encryption\Encrypter;
 use App\Http\Controllers\Controller;
 use App\Models\baseModel;
 use App\Models\SistemaTurnos\Vw_usuarios;
@@ -20,11 +21,15 @@ class UsuariosController extends Controller
 {
 
     protected $pageData;
+    protected $encrypter;
 
-    public function __construct()
+    public function __construct(Encrypter $encrypter)
     {
+        $this->encrypter = $encrypter;
         $this->pageData = [];
     }
+
+
 
     public function usuarios(Request $request)
     {
@@ -106,7 +111,7 @@ class UsuariosController extends Controller
                     data-toggle="tooltip"
                     data-original-title="Prioridad"
                     class="btnUPD"
-                    href="' . route("detalle_rol_asignacion") . '/' . strval($item->id) . '"
+                    href="' . route("detalle_rol_asignacion", ['id' => encrypt($item->id)]) . '"
                     > <i class="fas fa-edit listaIcon"></i></a>';
 
             $name = $item->name;
@@ -134,9 +139,9 @@ class UsuariosController extends Controller
         return response()->json($response);
     }
 
-    public function asignacion_rol(Request $request, $id)
+    public function asignacion_rol(Request $request, $encryptedId)
     {
-
+        $id = decrypt($encryptedId);
         $usuario = Vw_usuarios::where('id', $id)->first();
         $this->pageData['usuario'] = $usuario;
 

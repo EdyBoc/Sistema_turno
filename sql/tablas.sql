@@ -1,6 +1,6 @@
 CREATE TABLE asignacion_turno (
     id_asignacion_turno INT PRIMARY KEY AUTO_INCREMENT,
-    id_catalogo_items INT NOT NULL,
+    id_catalogo_item INT NOT NULL,
     id_usuario INT NOT NULL,
     fh_asignacion_dependencia DATETIME NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT true,
@@ -8,11 +8,27 @@ CREATE TABLE asignacion_turno (
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
-    CONSTRAINT FK_asignacion_turno_catalogo_items FOREIGN KEY (id_catalogo_items) REFERENCES catalogo_items(id_catalogo_item),
-    CONSTRAINT FK_asignacion_turno_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_catalogo_item) REFERENCES catalogo_items(id_catalogo_item),
+    FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
 
+ CREATE TABLE Asignaciones (
+    id_asignacion INT PRIMARY KEY AUTO_INCREMENT,
+    id_turno INT NOT NULL,
+    id_catalogo_item INT NOT NULL,
+    fh_asignacion DATE NOT NULL,
+    id_usuario INT NOT NULL,
+    estado BOOLEAN NOT NULL DEFAULT true,
+    user varchar(191),
+    fn_ingreso datetime ,
+    fn_ultima_modificacion datetime ,
+    ip VARCHAR(15) ,
+    FOREIGN KEY (id_catalogo_item) REFERENCES catalogo_items(id_catalogo_item),
+    FOREIGN KEY (id_usuario) REFERENCES users(id)
+    );
+
+--Esta tabla es funcional
     CREATE TABLE control_ingreso_salida (
     id_control INT PRIMARY KEY AUTO_INCREMENT,
     fh_hora_ingreso DATETIME NOT NULL,
@@ -24,23 +40,9 @@ CREATE TABLE asignacion_turno (
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
-    CONSTRAINT FK_control_ingreso_salida_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
-
-    CREATE TABLE asignacion_dependencia (
-    id_asignacion_dependencia INT PRIMARY KEY AUTO_INCREMENT,
-    id_catalogo_items INT NOT NULL,
-    fh_asignacion_dependencia DATE NOT NULL,
-    id_usuario INT NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
-    user varchar(191),
-    fn_ingreso datetime ,
-    fn_ultima_modificacion datetime ,
-    ip VARCHAR(15) ,
-    CONSTRAINT FK_asignacion_dependencia_catalogo_items FOREIGN KEY (id_catalogo_items) REFERENCES catalogo_items(id_catalogo_item),
-    CONSTRAINT FK_asignacion_dependencia_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
-    );
 
 --Esta tabla es funcional
     CREATE TABLE Persona (
@@ -124,6 +126,7 @@ CREATE TABLE asignacion_turno (
     id_roles INT PRIMARY KEY AUTO_INCREMENT,
     id_catalogo_rol INT NOT NULL,
     id_usuario INT NOT NULL,
+    id_persona INT NOT NULL,
     fecha_control DATETIME NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT true,
     user varchar(191),
@@ -131,6 +134,7 @@ CREATE TABLE asignacion_turno (
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
     FOREIGN KEY (id_catalogo_rol) REFERENCES catalogo_rol(id_catalogo_rol),
+    FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
     FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 

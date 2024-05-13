@@ -39,6 +39,22 @@
             border-radius: 10px;
             /* Borde redondeado para la fila de detalles */
         }
+
+        .notification-icon {
+            position: relative;
+            display: inline-block;
+        }
+
+        .notification-icon .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 12px;
+        }
     </style>
 @endsection
 
@@ -65,6 +81,13 @@
                                     </a>
                                     <a class="btn btn-primary btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
                                         Actualizar</a>
+
+                                    <a href="#" class="notification-icon">
+                                        <i class="fas fa-bell" style="font-size: 23px;"></i>
+                                        @if ($numSolicitudesPendientes > 0)
+                                            <span class="badge">{{ $numSolicitudesPendientes }}</span>
+                                        @endif
+                                    </a>
                                 </div>
                             </div>
 
