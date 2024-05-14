@@ -12,6 +12,9 @@
         <a class="nav-link" href="/index_asignacion">
             <i class="fas fa-clipboard-list"></i><span>Asignaciones</span>
         </a>
+        <a class="nav-link" href="/index_perfil">
+            <i class="fas fa-walking"></i><span>Trabajador</span>
+        </a>
         <a class="nav-link" href="/index_vacaciones">
             <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
         </a>

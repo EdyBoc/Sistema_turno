@@ -13,6 +13,7 @@ use App\Http\Controllers\SistemaTurnos\RrhhController;
 use App\Http\Controllers\SistemaTurnos\ReporteriaController;
 use App\Http\Controllers\SistemaTurnos\UsuariosController;
 use App\Http\Controllers\SistemaTurnos\CatalogoRolController;
+use App\Http\Controllers\SistemaTurnos\PerfilController;
 
 
 /*
@@ -70,3 +71,5 @@ Route::get('/filtar_persona', [App\Http\Controllers\SistemaTurnos\VacacionContro
 Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'listar'])->name('index_listar');
 //Reporteria
 Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');
+//Perfil del trabajador
+Route::get('/index_perfil', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_perfil'])->name('index_perfil');
