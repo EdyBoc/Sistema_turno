@@ -21,6 +21,9 @@
         <a class="nav-link" href="index_listar">
             <i class="fas fa-paperclip"></i><span>RRHH</span>
         </a>
+        <a class="nav-link" href="index_reporte">
+            <i class="fas fa-paperclip"></i><span>Reporteria</span>
+        </a>
     </li>
 @else
     <a class="nav-link" href="/home">

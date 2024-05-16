@@ -8,6 +8,22 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="justify-content-center text-center">
+                                <a class="btn btn-primary btn-lg" href="{{ route('index_horas_extras') }}">
+                                    <i class="fas fa-street-view"></i> Lista Horas Extras
+                                </a>
+                                <a class="btn btn-primary btn-lg" href="{{ route('index_solicitudes') }}">
+                                    <i class="fas fa-street-view"></i> Lista Solicitudes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="card ">
                         <div class="card-body">
                             <h4 style="text-align: center;">Bienvenido</h4>
@@ -22,7 +38,4 @@
             </div>
         </div>
     </section>
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript"></script>
 @endsection

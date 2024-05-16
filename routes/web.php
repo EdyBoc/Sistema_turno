@@ -69,7 +69,13 @@ Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionCont
 Route::get('/filtar_persona', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'filtar_datos_persona'])->name('filtar_persona');
 //Recursos Humanos
 Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'listar'])->name('index_listar');
+Route::get('/index_alta', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'view_nueva_alta'])->name('index_alta');
+Route::post('/guardar_altas', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'guardar_personas_altas'])->name('guardar_altas');
+
 //Reporteria
 Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');
 //Perfil del trabajador
 Route::get('/index_perfil', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_perfil'])->name('index_perfil');
+Route::get('/index_horas_extras', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_horas_extras'])->name('index_horas_extras');
+Route::get('/index_solicitudes', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_solicitudes'])->name('index_solicitudes');
+Route::post('/guardar_solicitud', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_solicitud'])->name('guardar_solicitud');
