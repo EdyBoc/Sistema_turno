@@ -11,20 +11,6 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary btn-lg"> <i
-                                            class="fas fa-street-view">Nuevo</i></button>
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item " href=" "><i class="fas fa-street-view"></i> Nueva
-                                            Alta</a>
-                                        <a class="dropdown-item " href=" "><i class="fas fa-business-time"></i> Nueva
-                                            baja</a>
-                                    </div>
-                                </div>
                                 <a class="btn btn-primary  btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
                                     Actualizar</a>
                                 <a class="btn btn-danger  btn-lg" id=""><i class="far fa-file-pdf"></i> PDF</a>
@@ -83,8 +69,7 @@
             ]);
 
             var options = {
-                title: 'Grafica cantidad de usuarios',
-                backgroundColor: 'black'
+                title: 'Grafica cantidad de usuarios'
             };
 
             var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
