@@ -33,7 +33,7 @@ class UsuariosController extends Controller
 
     public function usuarios(Request $request)
     {
-        return view('sistemaTurnos.usuario.index');
+        return view('sistemaTurnos.usuario.index_usuario');
     }
 
     public function listar_usuarios(request $request)

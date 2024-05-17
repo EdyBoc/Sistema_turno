@@ -6,11 +6,8 @@
         <a class="nav-link" href="/index_catalogo">
             <i class="fas fa-book"></i><span>Catálogo</span>
         </a>
-        <a class="nav-link" href="/index_usuarios">
-            <i class="fas fa-users-cog"></i><span>Usuarios</span>
-        </a>
         <a class="nav-link" href="/index_asignacion">
-            <i class="fas fa-clipboard-list"></i><span>Asignaciones</span>
+            <i class="fas fa-clipboard-list"></i><span>Asignación</span>
         </a>
         <a class="nav-link" href="/index_perfil">
             <i class="fas fa-walking"></i><span>Trabajador</span>
@@ -19,7 +16,7 @@
             <i class="fas fa-paperclip"></i><span>Recursos Humanos</span>
         </a>
         <a class="nav-link" href="index_reporte">
-            <i class="fas fa-paperclip"></i><span>Reporteria</span>
+            <i class="fas fa-paperclip"></i><span>Repostería</span>
         </a>
     </li>
 @else

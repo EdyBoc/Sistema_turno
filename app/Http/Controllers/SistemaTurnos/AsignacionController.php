@@ -18,6 +18,6 @@ class AsignacionController extends Controller
 
     public function asignacion(Request $request)
     {
-        return view('sistemaTurnos.asignaciones.index');
+        return view('sistemaTurnos.asignaciones.index_asignacion');
     }
 }

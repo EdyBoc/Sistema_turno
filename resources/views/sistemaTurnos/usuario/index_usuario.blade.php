@@ -43,13 +43,20 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Módulo de Usuarios</h3>
+            <h3 class="page__heading">Lista Asignacion Roles</h3>
         </div>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="justify-content-center text-center">
+                                <a class="btn btn-danger btn-lg" href="{{ route('index_asignacion') }}"><i
+                                        class="fas fa-reply"></i></i>Regrar</a>
+                                <a class="btn btn-primary btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
+                                    Actualizar</a>
+                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-sm" id="listadoTabla" cellspacing="0" style="font-size: 80%;">
                                     <thead>
