@@ -198,3 +198,47 @@ CREATE TABLE asignacion_turno (
         roles rol ON pers.id = rol.id_usuario
     LEFT JOIN
         catalogo_rol cr ON rol.id_catalogo_rol = cr.id_catalogo_rol;
+
+    --Tabla de autorizaciones
+    CREATE TABLE autorizacion (
+        id_autorizacion INT PRIMARY KEY AUTO_INCREMENT,
+        id_solicitud INT,
+        id_reporte_horas INT,
+        fecha_autorizacion DATETIME NOT NULL,
+        obervacion VARCHAR(255) NOT NULL,
+        estado BOOLEAN NOT NULL DEFAULT true,
+        user varchar(191),
+        fn_ingreso datetime ,
+        fn_ultima_modificacion datetime ,
+        ip VARCHAR(15) ,
+        FOREIGN KEY (id_solicitud) REFERENCES solicitud(id_solicitud),
+        FOREIGN KEY (id_reporte_horas) REFERENCES reporte_horas(id_reporte_horas)
+    );
+
+    CREATE TABLE solicitud (
+        id_solicitud INT PRIMARY KEY AUTO_INCREMENT,
+        id_usuario INT NOT NULL,
+        tipo_solicitud VARCHAR(25) NOT NULL,
+        fecha_solicitud DATETIME NOT NULL,
+        obervacion VARCHAR(255) NOT NULL,
+        estado BOOLEAN,
+        user varchar(191),
+        fn_ingreso datetime ,
+        fn_ultima_modificacion datetime ,
+        ip VARCHAR(15) ,
+        FOREIGN KEY (id_usuario) REFERENCES users(id)
+    );
+
+    CREATE TABLE reporte_horas (
+        id_reporte_horas INT PRIMARY KEY AUTO_INCREMENT,
+        id_usuario INT NOT NULL,
+        inicio_hora TIME NOT NULL,
+        fin_hora TIME NOT NULL,
+        fecha_reporte_horas DATETIME NOT NULL,
+        estado BOOLEAN,
+        user varchar(191),
+        fn_ingreso datetime ,
+        fn_ultima_modificacion datetime ,
+        ip VARCHAR(15) ,
+        FOREIGN KEY (id_usuario) REFERENCES users(id)
+    );

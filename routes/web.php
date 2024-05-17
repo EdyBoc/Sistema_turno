@@ -79,3 +79,4 @@ Route::get('/index_perfil', [App\Http\Controllers\SistemaTurnos\PerfilController
 Route::get('/index_horas_extras', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_horas_extras'])->name('index_horas_extras');
 Route::get('/index_solicitudes', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_solicitudes'])->name('index_solicitudes');
 Route::post('/guardar_solicitud', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_solicitud'])->name('guardar_solicitud');
+Route::post('/guardar_horas', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_reporte_horas'])->name('guardar_horas');

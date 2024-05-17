@@ -26,26 +26,40 @@
                     <div class="card ">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-sm" id="tabla_personas" cellspacing="0" style="font-size: 80%;">
+                                <table class="table table-sm" id="tabla_vacacion" cellspacing="0" style="font-size: 80%;">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Tipo</th>
-                                            <th>Motivo</th>
-                                            <th>Fecha</th>
-                                            <th>Estado</th>
-                                            <th>Observación</th>
+                                            <th class="col-1" style="text-align: center;"> No. </th>
+                                            <th class="col-2" style="text-align: center;"> Tipo</th>
+                                            <th class="col-2" style="text-align: center;"> Fecha</th>
+                                            <th class="col-2" style="text-align: center;"> Motivo</th>
+                                            <th class="col-2" style="text-align: center;"> Estado</th>
+                                            <th style="text-align: center;"> Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Registro</td>
-                                            <td>Creación de usuario</td>
-                                            <td>14/05/2024</td>
-                                            <td>Aceptado</td>
-                                            <td>Puede Proceder</td>
-                                        </tr>
+                                        @foreach ($solicitudes as $solicitud)
+                                            <tr>
+                                                <td style="text-align: center;">{{ $solicitud->id_solicitud }}</td>
+                                                <td style="text-align: center;">{{ $solicitud->tipo_solicitud }}</td>
+                                                <td style="text-align: center;">{{ $solicitud->fecha_solicitud }}</td>
+                                                <td style="text-align: center;">{{ $solicitud->obervacion }}</td>
+                                                <td style="text-align: center; color:
+                                                @if ($solicitud->estado === 'Autorizado')
+                                                    green;
+                                                @elseif ($solicitud->estado === 'No autorizado')
+                                                    blue;
+                                                @else
+                                                    red;
+                                                @endif
+                                                "><strong>{{ $solicitud->estado }}</strong></td>
+                                                <td style="text-align: center;">
+                                                    <a class="btn btn-primary btn-sm text-center" title="Anular solicitud">
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -97,12 +111,6 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $("#btn_actualizar").click(function() {
-                location.reload();
-            });
-        });
-
         $("#btn_guardar_catalogo").click(function(e) {
             e.preventDefault();
             var tipo_solicitud = $("#tipo_solicitud").val();
@@ -119,6 +127,7 @@
                         toastr.error(response.message);
                     } else {
                         toastr.success(response.message);
+                        location.reload();
                     }
                 }
             });

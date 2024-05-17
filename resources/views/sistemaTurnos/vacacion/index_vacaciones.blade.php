@@ -84,8 +84,16 @@
 
                                     <a href="#" class="notification-icon">
                                         <i class="fas fa-bell" style="font-size: 23px;"></i>
-                                        @if ($numSolicitudesPendientes > 0)
-                                            <span class="badge">{{ $numSolicitudesPendientes }}</span>
+                                        @if ($totalReporteHoras > 0)
+                                            <span class="badge"
+                                                title="Autorizacion de horas Pendientes">{{ $totalReporteHoras }}</span>
+                                        @endif
+                                    </a>
+                                    <a href="#" class="notification-icon">
+                                        <i class="fas fa-bell" style="font-size: 23px;"></i>
+                                        @if ($totalSolicitudes > 0)
+                                            <span class="badge"
+                                                title="Autorizacion de horas Pendientes">{{ $totalSolicitudes }}</span>
                                         @endif
                                     </a>
                                 </div>

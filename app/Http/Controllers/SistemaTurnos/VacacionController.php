@@ -9,6 +9,8 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use App\Models\baseModel;
 use App\Models\SistemaTurnos\Persona;
 use App\Models\SistemaTurnos\Vacacion;
+use App\Models\SistemaTurnos\ReporteHoras;
+use App\Models\SistemaTurnos\Solicitud;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Validator;
@@ -30,11 +32,16 @@ class VacacionController extends Controller
     public function vista(Request $request)
     {
 
-        $vacacion['vacaciones'] = Vacacion::all();
+        $vacacion = Vacacion::all();
 
-        $numSolicitudesPendientes['numSolicitudesPendientes'] = rand(0, 10);
+        $totalReporteHoras = ReporteHoras::whereNull('estado')->orWhere('estado', '')->count();
+        $totalSolicitudes = Solicitud::whereNull('estado')->orWhere('estado', '')->count();
 
-        return view('sistemaTurnos.vacacion.index_vacaciones', $vacacion, $numSolicitudesPendientes);
+        return view('sistemaTurnos.vacacion.index_vacaciones', [
+            'vacaciones' => $vacacion,
+            'totalReporteHoras' => $totalReporteHoras,
+            'totalSolicitudes' => $totalSolicitudes,
+        ]);
     }
 
     public function crear_vacaciones(Request $request)
