@@ -36,6 +36,14 @@ class RrhhController extends Controller
         return view('sistemaTurnos.rrhh.index_alta');
     }
 
+    public function lista_personas(Request $request)
+    {
+        $persona['personas'] = Persona::all();
+        return view('sistemaTurnos.rrhh.lista_personas', $persona);
+    }
+
+
+
 
     public function guardar_personas_altas(Request $request)
     {
