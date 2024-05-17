@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SistemaTurnos\Persona;
+use App\Models\SistemaTurnos\ReporteHoras;
+use App\Models\SistemaTurnos\Solicitud;
 use App\Models\baseModel;
 use Carbon\Carbon;
 use Response;
@@ -20,27 +22,13 @@ class RrhhController extends Controller
     public function listar(Request $request)
     {
 
-        $personas = Persona::all();
+        $totalReporteHoras = ReporteHoras::whereNull('estado')->orWhere('estado', '')->count();
+        $totalSolicitudes = Solicitud::whereNull('estado')->orWhere('estado', '')->count();
 
-        foreach ($personas as $persona) {
-            $estadoPersona = $persona->estado; // Obtener el estado de la persona actual
-
-            switch ($estadoPersona) {
-                case 1:
-                    $persona->estado_texto = "Alta";
-                    break;
-                case 2:
-                    $persona->estado_texto = "Baja";
-                    break;
-                case 3:
-                    $persona->estado_texto = "Inactivo";
-                    break;
-                default:
-                    $persona->estado_texto = "Estado desconocido: " . $estadoPersona;
-            }
-        }
-
-        return view('sistemaTurnos.rrhh.index_listar', compact('personas'));
+        return view('sistemaTurnos.rrhh.index_listar', [
+            'totalReporteHoras' => $totalReporteHoras,
+            'totalSolicitudes' => $totalSolicitudes,
+        ]);
     }
 
     public function view_nueva_alta(Request $request)

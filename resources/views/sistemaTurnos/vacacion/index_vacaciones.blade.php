@@ -69,33 +69,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row justify-content-center text-center">
-
-                                <div class="col-md-6"> <!-- Columna para el campo de fecha -->
-                                    <div class="form-group">
-                                        {{ Form::date('fecha', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Seleccione una fecha']) }}
-                                    </div>
-                                </div>
-                                <div class="col-md-6"> <!-- Columna para el primer botón -->
+                                <div class="col-md-12">
+                                    <a class="btn btn-danger btn-lg" href="{{ route('index_listar') }}"><i
+                                            class="fas fa-reply"></i></i>Regrar</a>
                                     <a class="btn btn-primary btn-lg" href="{{ route('crear_vacaciones') }}">
                                         <i class="fas fa-street-view"></i> Nuevo
                                     </a>
                                     <a class="btn btn-primary btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
                                         Actualizar</a>
-
-                                    <a href="#" class="notification-icon">
-                                        <i class="fas fa-bell" style="font-size: 23px;"></i>
-                                        @if ($totalReporteHoras > 0)
-                                            <span class="badge"
-                                                title="Autorizacion de horas Pendientes">{{ $totalReporteHoras }}</span>
-                                        @endif
-                                    </a>
-                                    <a href="#" class="notification-icon">
-                                        <i class="fas fa-bell" style="font-size: 23px;"></i>
-                                        @if ($totalSolicitudes > 0)
-                                            <span class="badge"
-                                                title="Autorizacion de horas Pendientes">{{ $totalSolicitudes }}</span>
-                                        @endif
-                                    </a>
                                 </div>
                             </div>
 

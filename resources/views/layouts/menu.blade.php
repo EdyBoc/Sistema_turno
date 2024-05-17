@@ -15,11 +15,8 @@
         <a class="nav-link" href="/index_perfil">
             <i class="fas fa-walking"></i><span>Trabajador</span>
         </a>
-        <a class="nav-link" href="/index_vacaciones">
-            <i class="fas fa-umbrella-beach"></i><span>Vacaciones</span>
-        </a>
         <a class="nav-link" href="index_listar">
-            <i class="fas fa-paperclip"></i><span>RRHH</span>
+            <i class="fas fa-paperclip"></i><span>Recursos Humanos</span>
         </a>
         <a class="nav-link" href="index_reporte">
             <i class="fas fa-paperclip"></i><span>Reporteria</span>
