@@ -52,30 +52,18 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Listado Catalogos Items</h3>
+            <h3 class="page__heading">Lista Catalogo Rol</h3>
         </div>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <a class="btn btn-danger btn-lg" href="/index_catalogo"><i
-                                                class="fas fa-reply"></i></i>Regrar</a>
-                                        <a class="btn btn-primary btn-lg" data-toggle="modal"
-                                            data-target="#modal_add_catalogo"><i class="fas fa-street-view"></i> Nuevo
-                                            Catalogo</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                    <a id="btn_creacion_catalogo" class="btn btn-primary btn-lg" data-toggle="modal"
-                                        data-target="#modal_add_catalogo_items"><i class="fas fa-street-view"></i> Crear
-                                        Catalogo
-                                        hijo</a>
-
-                                </div>
+                            <div class="justify-content-center text-center">
+                                <a class="btn btn-danger btn-lg" href="/index_catalogo"><i
+                                        class="fas fa-reply"></i></i>Regrar</a>
+                                <a class="btn btn-primary btn-lg" data-toggle="modal"
+                                    data-target="#modal_add_catalogo_rol"><i class="fas fa-street-view"></i> Nuevo</a>
                             </div>
                         </div>
                     </div>
@@ -98,7 +86,7 @@
                                                 <th class="col-2" style="text-align: center;"> Nombre</th>
                                                 <th class="col-2" style="text-align: center;"> Descripción</th>
                                                 <th class="col-2" style="text-align: center;"> Fecha</th>
-                                                <th style="text-align: center;"> Acciones</th>
+                                                <th class="col-2" style="text-align: center;"> Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -111,8 +99,9 @@
                                                     <td style="text-align: center;">{{ $catalogo_rol->fn_catalogo_rol }}
                                                     </td>
                                                     <td style="text-align: center;">
-                                                        <a class="btn-primary btn-sm" id="ver_detalle"><i
-                                                                class="far fa-eye"></i></a>
+                                                        <a class="btn-primary btn-sm" id="editar_rol">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -128,19 +117,30 @@
     </section>
 
     <!-- Modal nuevo Catalogo-->
-    <div class="modal fade" id="modal_add_catalogo_items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modal_add_catalogo_rol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white  text-center">
-                    <h5 class="modal-title  mx-auto">Nuevo Catálogo</h5>
+                    <h5 class="modal-title  mx-auto">Nuevo Rol</h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="catalogo_nombre">
+                            <input type="text" class="form-control" id="catalogo_rol">
                             <div class="input-group-append">
-                                <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre Catalogo">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fr_catalogo_nombre">Descripcion:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="descripcion">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Descripcion">
                                     <i class="fas fa-puzzle-piece"></i>
                                 </button>
                             </div>
@@ -148,10 +148,10 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a id="btnCerrar" onclick="$('#modal_add_catalogo').modal('hide');" class="btn btn-danger btn-lg"><i
+                    <a id="btnCerrar" onclick="$('#modal_add_catalogo_rol').modal('hide');" class="btn btn-danger btn-lg"><i
                             class="fa fa-times"></i>&nbsp;Cancelar</a>
                     &nbsp;
-                    <a href="#" id="btn_guardar_catalogo" class="btn btn-success btn-lg"><i
+                    <a href="#" id="btn_guardar_catalogo_rol" class="btn btn-success btn-lg"><i
                             class="fas fa-save"></i>&nbsp;Guardar</a>
                 </div>
             </div>
@@ -163,6 +163,28 @@
         $(document).ready(function() {
             $("#btn_actualizar").click(function() {
                 location.reload();
+            });
+        });
+
+        $("#btn_guardar_catalogo_rol").click(function(e) {
+            e.preventDefault();
+            var catalogo_rol = $("#catalogo_rol").val();
+            var descripcion = $("#descripcion").val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('guardar_catalogo_rol') }}",
+                data: {
+                    catalogo_rol: catalogo_rol,
+                    descripcion: descripcion,
+                },
+                success: function(response) {
+                    if (!response.success) {
+                        toastr.error(response.message);
+                    } else {
+                        toastr.success(response.message);
+                        location.reload();
+                    }
+                }
             });
         });
     </script>

@@ -61,7 +61,7 @@ Route::post('/guardar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoCon
 Route::post('/inactivar_catalogo_items/{id?}', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'inactivar_catalogo_items'])->name('inactivar_catalogo_items');
 //Catalogos Roles
 Route::get('/index_catalogo_roles', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'vista'])->name('index_catalogo_roles');
-
+Route::post('/guardar_catalogo_rol', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'guardar_catalogo_rol'])->name('guardar_catalogo_rol');
 
 //Vacaciones
 Route::get('/index_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'vista'])->name('index_vacaciones');
