@@ -29,10 +29,10 @@ CREATE TABLE asignacion_turno (
     );
 
 --Esta tabla es funcional
-    CREATE TABLE control_ingreso_salida (
-    id_control INT PRIMARY KEY AUTO_INCREMENT,
-    fh_hora_ingreso DATETIME NOT NULL,
-    fh_hora_salida DATETIME NOT NULL,
+   CREATE TABLE Control_ingreso_salida (
+    id_control_ingreso_salida INT PRIMARY KEY AUTO_INCREMENT,
+    inicio_hora TIME NOT NULL,
+    fin_hora TIME,
     id_usuario INT NOT NULL,
     fh_control DATE NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT true,

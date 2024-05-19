@@ -16,27 +16,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary btn-lg">Nuevo</button>
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item " href=" "><i class="fas fa-street-view"></i> Asignar
-                                            Dependencia</a>
-                                        <a class="dropdown-item " href=" "><i class="fas fa-business-time"></i>
-                                            Asignar
-                                            Turno</a>
-                                        <a class="dropdown-item " href="{{ route('index_usuario') }}"><i
-                                                class="fas fa-user-lock"></i>
-                                            Asignar Rol</a>
-                                    </div>
-                                </div>
-                                <a class="btn btn-success btn-lg" id="btn_actualizar"><i
-                                        class="fas fa-history"></i>Actualizar</a>
-                                <a href="#" class="btn btn-primary btn-lg" id="btn_detalle"><i
-                                        class="fas fa-layer-group"></i>Detalle</a>
+                                <a class="btn btn-primary"><i class="fas fa-business-time"></i>Dependencia</a>
+                                <a class="btn btn-primary"><i class="fas fa-business-time"></i></i>Turno</a>
+                                <a class="btn btn-primary " href="{{ route('index_usuario') }}"><i
+                                        class="fas fa-user-lock"></i>
+                                    Asignar Rol</a>
+                                <a class="btn btn-primary " id="btn_actualizar"><i class="fas fa-history"></i>
+                                    Actualizar</a>
                             </div>
                         </div>
                     </div>

@@ -67,16 +67,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <a class="btn btn-primary btn-lg" href="{{ route('index_alta') }}">
-                                    <i class="fas fa-street-view"></i> Nueva Alta
-                                </a>
                                 <a class="btn btn-primary btn-lg" href="{{ route('lista_personas') }}">
                                     <i class="fas fa-street-view"></i> Lista personas
                                 </a>
                                 <a class="btn btn-primary btn-lg" href="{{ route('index_vacaciones') }}">
                                     <i class="fas fa-street-view"></i> Vacaciones
                                 </a>
-                                <a class="btn btn-primary btn-lg" href="{{ route('index_solicitudes') }}">
+                                <a class="btn btn-primary btn-lg" href=" ">
                                     <i class="fas fa-street-view"></i> Solicitudes
                                 </a>
 

@@ -46,84 +46,179 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Formulario de Altas</h3>
+            <h3 class="page__heading">Formulario</h3>
         </div>
         <div class="section-body">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row justify-content-center align-items-center" style="height: 100vh;">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
+                                <h5 class="page__heading">Nueva Alta</h5>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
+
                                         <div class="form-group">
                                             <label for="cui">CUI:</label>
-                                            <input type="number" class="form-control" id="cui" name="cui"
-                                                required>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="cui" name="cui"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="nombre_completo">Nombre Completo:</label>
-                                            <input type="text" class="form-control" id="nombre_completo"
-                                                name="nombre_completo" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="nombre_completo"
+                                                    name="nombre_completo" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="pais">pais:</label>
-                                            <input type="text" class="form-control" id="pais" name="pais"
-                                                required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="pais" name="pais"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="departamento">Departamento:</label>
-                                            <input type="text" class="form-control" id="departamento" name="departamento"
-                                                required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="departamento"
+                                                    name="departamento" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="fh_nacimiento">Fecha de Nacimiento:</label>
-                                            <input type="date" class="form-control" id="fh_nacimiento"
-                                                name="fh_nacimiento" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="correo_electronico">Correo Electrónico:</label>
-                                            <input type="email" class="form-control" id="correo_electronico"
-                                                name="correo_electronico" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="direccion">Dirección:</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="telefono">Teléfono:</label>
-                                            <input type="number" class="form-control" id="telefono" name="telefono"
-                                                required>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nit">NIT:</label>
-                                            <input type="number" class="form-control" id="nit" name="nit"
-                                                required>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="nit" name="nit"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="telefono_emergencia">Teléfono de Emergencia:</label>
-                                            <input type="number" class="form-control" id="telefono_emergencia"
-                                                name="telefono_emergencia" required>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="telefono_emergencia"
+                                                    name="telefono_emergencia" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fr_catalogo_nombre">Fecha de Nacimiento:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="fh_nacimiento"
+                                                    name="fh_nacimiento" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="correo_electronico">Correo Electrónico:</label>
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" id="correo_electronico"
+                                                    name="correo_electronico" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="direccion"
+                                                    name="direccion" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="telefono">Teléfono:</label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="telefono"
+                                                    name="telefono" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Nacimiento">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="sexo">Sexo:</label>
-                                            <select class="form-control" id="sexo" name="sexo" required>
-                                                <option value="M">Masculino</option>
-                                                <option value="F">Femenino</option>
-                                            </select>
+                                            <div class="input-group">
+                                                <select id="tipo_solicitud" class="custom-select"
+                                                    title="Tipo de Solicitud" required>
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="F">Femenino</option>
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="TIpo de Solicitud">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-danger btn-lg" href="/index_listar"><i
+                                <a class="btn btn-danger btn-lg" href="{{ route('lista_personas') }}"><i
                                         class="fas fa-reply"></i></i>Regrar</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
 

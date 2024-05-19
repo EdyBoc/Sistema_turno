@@ -22,20 +22,24 @@ class ReporteriaController extends Controller
         return view('sistemaTurnos.reporteria.index');
     }
 
-    public function getData(Request $request)
+    public function horasSalidaChart(Request $request)
     {
-        // Suponiendo que tienes un modelo llamado ControlHoras que contiene los datos necesarios
-        $data = ControlHoras::selectRaw('task, SUM(hours) as hours')
-            ->groupBy('task')
-            ->get()
-            ->toArray();
+        $fhInicial = $request->input('inicio_hora');
+        $fhFinal = $request->input('fin_hora');
+        $fh_control = $request->input('fh_control');
 
-        // Formatear datos para Google Charts
-        $formattedData = [['Task', 'Hours']];
-        foreach ($data as $row) {
-            $formattedData[] = [$row['task'], (int)$row['hours']];
-        }
+        $data = ControlHoras::when($fhInicial && $fhFinal, function ($query) use ($fhInicial, $fhFinal) {
+            // Parsear las horas de inicio y fin
+            $horaInicio = Carbon::parse($fhInicial);
+            $horaFin = Carbon::parse($fhFinal);
 
-        return response()->json($formattedData);
+            return $query->where(function ($query) use ($horaInicio, $horaFin) {
+                // Condición para horas de inicio entre $fhInicial y $fhFinal
+                $query->whereTime('inicio_hora', '>=', $horaInicio)
+                    ->whereTime('inicio_hora', '<=', $horaFin);
+            });
+        })->get();
+        //return response()->json($data);
+        return response::json($data);
     }
 }

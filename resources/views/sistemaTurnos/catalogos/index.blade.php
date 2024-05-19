@@ -11,14 +11,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <a class="btn btn-primary" href="/lista_catalogo"><i class="fas fa-street-view"></i>Catalogos
+                                <a class="btn btn-primary" href="{{ route('index_dependencia') }}"><i
+                                        class="fas fa-layer-group"></i>Catalogos
                                     Dependencia</a>
-                                <a class="btn btn-primary" href=" "><i class="fas fa-street-view"></i>Catalogo
+                                <a class="btn btn-primary" href="{{ route('index_turno') }}"><i
+                                        class="fas fa-layer-group"></i></i>Catalogo
                                     Turno</a>
                                 <a class="btn btn-primary" href="/index_catalogo_roles"><i
-                                        class=" fas fa-user-lock"></i>Catalogo
+                                        class="fas fa-layer-group"></i>Catalogo
                                     roles</a>
-                                <a class="btn btn-primary" id="btn_actualizar"><i class="fas fa-history"></i>
+                                <a class="btn btn-primary " id="btn_actualizar"><i class="fas fa-history"></i>
                                     Actualizar</a>
                                 <a href="#" class="btn btn-primary"><i class="fas fa-layer-group"></i> Detalle</a>
                             </div>

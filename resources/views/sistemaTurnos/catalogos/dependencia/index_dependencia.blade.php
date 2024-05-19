@@ -52,7 +52,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Lista Catalogo Rol</h3>
+            <h3 class="page__heading">Lista Catalogo Dependencia</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -63,7 +63,8 @@
                                 <a class="btn btn-danger btn-lg" href="/index_catalogo"><i
                                         class="fas fa-reply"></i></i>Regrar</a>
                                 <a class="btn btn-primary btn-lg" data-toggle="modal"
-                                    data-target="#modal_add_catalogo_rol"><i class="fas fa-street-view"></i> Nuevo</a>
+                                    data-target="#modal_add_catalogo_dependencia"><i class="fas fa-street-view"></i>
+                                    Nuevo</a>
                             </div>
                         </div>
                     </div>
@@ -79,27 +80,31 @@
                                     <div class="loader" id="loader"></div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-sm" id="listadoTabla" cellspacing="0" style="font-size: 80%;">
+                                    <table class="table table-sm" id="tabla_vacacion" cellspacing="0"
+                                        style="font-size: 80%;">
                                         <thead>
                                             <tr>
                                                 <th class="col-1" style="text-align: center;"> No. </th>
-                                                <th class="col-2" style="text-align: center;"> Nombre</th>
-                                                <th class="col-2" style="text-align: center;"> Descripción</th>
+                                                <th class="col-2" style="text-align: center;"> Hora Inicio</th>
+                                                <th class="col-2" style="text-align: center;"> Hora Fin</th>
                                                 <th class="col-2" style="text-align: center;"> Fecha</th>
                                                 <th class="col-2" style="text-align: center;"> Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($catalogo_roles as $catalogo_rol)
+                                            @foreach ($catalogo_dependencias as $catalogo_dependencia)
                                                 <tr>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->id_catalogo_rol }}
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->id_catalogo_dependencia }}</td>
+                                                    <td style="text-align: center;">{{ $catalogo_dependencia->nombre }}</td>
+                                                    <td style="text-align: center;">{{ $catalogo_dependencia->descripcion }}
                                                     </td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->nombre }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->descripcion }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->fn_catalogo_rol }}
-                                                    </td>
-                                                    <td style="text-align: center;"><a id="editar_rol"><i
-                                                                class="fas fa-edit listaIcon"></i></a>
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->fn_catalogo_rol }}</td>
+                                                    <td style="text-align: center;">
+                                                        <a id="editar_rol">
+                                                            <i class="fas fa-edit listaIcon"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -111,21 +116,21 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Modal nuevo Catalogo-->
-    <div class="modal fade" id="modal_add_catalogo_rol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modal_add_catalogo_dependencia" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white  text-center">
-                    <h5 class="modal-title  mx-auto">Nuevo Rol</h5>
+                    <h5 class="modal-title  mx-auto">Nuevo Dependencia</h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="catalogo_rol">
+                            <input type="text" class="form-control" id="nombre_dependencia">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre">
                                     <i class="fas fa-puzzle-piece"></i>
@@ -136,9 +141,9 @@
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Descripcion:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="descripcion">
+                            <input type="text" class="form-control" id="descripcion_dependencia">
                             <div class="input-group-append">
-                                <button class="btn btn-secondary" data-toggle="tooltip" title="Descripcion">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="descripcion_dependencia">
                                     <i class="fas fa-puzzle-piece"></i>
                                 </button>
                             </div>
@@ -146,10 +151,10 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a id="btnCerrar" onclick="$('#modal_add_catalogo_rol').modal('hide');" class="btn btn-danger btn-lg"><i
-                            class="fa fa-times"></i>&nbsp;Cancelar</a>
+                    <a id="btnCerrar" onclick="$('#modal_add_catalogo_dependencia').modal('hide');"
+                        class="btn btn-danger btn-lg"><i class="fa fa-times"></i>&nbsp;Cancelar</a>
                     &nbsp;
-                    <a href="#" id="btn_guardar_catalogo_rol" class="btn btn-success btn-lg"><i
+                    <a href="#" id="btn_guardar_catalogo_dependencia" class="btn btn-success btn-lg"><i
                             class="fas fa-save"></i>&nbsp;Guardar</a>
                 </div>
             </div>
@@ -164,16 +169,16 @@
             });
         });
 
-        $("#btn_guardar_catalogo_rol").click(function(e) {
+        $("#btn_guardar_catalogo_dependencia").click(function(e) {
             e.preventDefault();
-            var catalogo_rol = $("#catalogo_rol").val();
-            var descripcion = $("#descripcion").val();
+            var nombre_dependencia = $("#nombre_dependencia").val();
+            var descripcion_dependencia = $("#descripcion_dependencia").val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('guardar_catalogo_rol') }}",
+                url: "{{ route('guardar_dependencia') }}",
                 data: {
-                    catalogo_rol: catalogo_rol,
-                    descripcion: descripcion,
+                    nombre_dependencia: nombre_dependencia,
+                    descripcion_dependencia: descripcion_dependencia,
                 },
                 success: function(response) {
                     if (!response.success) {

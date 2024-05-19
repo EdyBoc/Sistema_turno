@@ -13,9 +13,9 @@
                             <div class="justify-content-center text-center">
                                 <a class="btn btn-danger btn-lg" href="{{ route('index_listar') }}"><i
                                         class="fas fa-reply"></i></i>Regrar</a>
-
-                                <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_add_solicitud"><i
-                                        class="fas fa-street-view"></i> Nuevo</a>
+                                <a class="btn btn-primary btn-lg" href="{{ route('index_alta') }}">
+                                    <i class="fas fa-street-view"></i> Nueva Alta
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -54,11 +54,13 @@ Route::post('/guardar_campos_salida', [App\Http\Controllers\SistemaTurnos\Asiste
 //asingaciones
 Route::get('/index_asignacion', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'asignacion'])->name('index_asignacion');
 //Catalogos
+//Catalogos
 Route::get('/index_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'catalogo'])->name('index');
-Route::get('/lista_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'lista_catalogo'])->name('lista_catalogo');
-Route::post('/listar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'listar'])->name('listar_catalogo');
-Route::post('/guardar_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'guardar_catalogo'])->name('guardar_catalogo');
-Route::post('/inactivar_catalogo_items/{id?}', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'inactivar_catalogo_items'])->name('inactivar_catalogo_items');
+Route::get('/index_dependencia', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'view_catalogo_dependencia'])->name('index_dependencia');
+Route::get('/index_turno', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'view_catalogo_turno'])->name('index_turno');
+Route::post('/guardar_turno', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'guardar_catalogo_turno'])->name('guardar_turno');
+Route::post('/guardar_dependencia', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'guardar_catalogo_dependencia'])->name('guardar_dependencia');
+
 //Catalogos Roles
 Route::get('/index_catalogo_roles', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'vista'])->name('index_catalogo_roles');
 Route::post('/guardar_catalogo_rol', [App\Http\Controllers\SistemaTurnos\CatalogoRolController::class, 'guardar_catalogo_rol'])->name('guardar_catalogo_rol');
@@ -75,6 +77,7 @@ Route::post('/guardar_altas', [App\Http\Controllers\SistemaTurnos\RrhhController
 
 //Reporteria
 Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');
+Route::post('/reporte_horas', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'horasSalidaChart'])->name('reporte_horas');
 //Perfil del trabajador
 Route::get('/index_perfil', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_perfil'])->name('index_perfil');
 Route::get('/index_horas_extras', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_horas_extras'])->name('index_horas_extras');

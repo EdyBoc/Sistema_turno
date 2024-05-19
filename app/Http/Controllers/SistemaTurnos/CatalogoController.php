@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\baseModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use App\Models\SistemaTurnos\Catalogo;
-use App\Models\SistemaTurnos\Catalogo_items;
+use App\Models\SistemaTurnos\Catalogo_dependencia;
+use App\Models\SistemaTurnos\Catalogo_turno;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Response;
@@ -25,91 +25,55 @@ class CatalogoController extends Controller
         return view('sistemaTurnos.catalogos.index');
     }
 
-    protected $pageData;
-
-    public function __construct()
+    public function view_catalogo_dependencia(Request $request)
     {
-        $this->pageData = [];
+        $catalogo_dependencia['catalogo_dependencias'] = Catalogo_dependencia::all();
+
+        return view('sistemaTurnos.catalogos.dependencia.index_dependencia', $catalogo_dependencia);
     }
 
-    public function lista_catalogo(Request $request)
+    public function view_catalogo_turno(Request $request)
     {
-        $estado = [
-            true => 'Activo',
-            false => 'Inactivo'
-        ];
+        $catalogoturno['catalogoturnos'] = Catalogo_turno::all();
 
-        $this->pageData['estado'] = $estado;
-
-        $catalogo = Catalogo::pluck('nombre', 'id_catalogo');
-
-        $this->pageData['catalogo'] = $catalogo;
-
-
-        return view('sistemaTurnos.catalogos.catalogo.lista_catalogo', $this->pageData);
+        return view('sistemaTurnos.catalogos.turno.index_turno', $catalogoturno);
     }
 
-
-    public function listar(Request $request)
+    public function guardar_catalogo_dependencia(Request $request)
     {
 
-        $existentes = Catalogo::find($request->id_catalogo);
-
-        if ($existentes) {
-            $catalogo_items = Catalogo_items:: //where('esta_activo', true)
-                select('id_catalogo_item', 'id_catalogo', 'nombre', 'estado', 'fh_catalogo_items')
-                ->where('id_catalogo', $request->id_catalogo)
-                ->orderBy('fh_catalogo_items', 'DESC')
-                ->get();
-
-
-            $data = $catalogo_items->map(function ($item) {
-                return [
-                    'id_catalogo_item' => $item->id_catalogo_item,
-                    'nombre' => $item->nombre,
-                    'estado' => $item->estado ? 'activo' : 'inactivo',
-                    'fh_catalogo_items' => $item->fh_catalogo_items,
-                ];
-            });
-            return response()->json($data, 200);
-        } else {
-            $data = ['mensaje' => 'Seleccione un Catalogo.'];
-            return response()->json($data, 200);
-        }
-    }
-
-
-    public function guardar_catalogo(Request $request)
-    {
         $validator = Validator::make(
             $request->all(),
             [
-                'nombre' => 'required',
+                'nombre_dependencia' => 'required',
+                'descripcion_dependencia' => 'required',
             ],
             [
-                'nombre.required' => 'Debe ingresar nombre',
+                'nombre_dependencia.required' => 'Debe ingresar nombre de tipo dependencia',
+                'descripcion_dependencia.required' => 'Debe ingresar un comentario',
             ]
         );
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Debe ingresar un nombre valido de catalogo',
+                'message' => 'Debe llenar todos los campos',
             ]);
         }
 
-        $fh_catalogo = Carbon::now();
+        $fn_catalogo_rol = Carbon::now();
         $fn_ingreso = Carbon::now();
         $ip = $request->ip();
         $user = $request->user()->name;
 
-        $catalogo = new Catalogo();
-        $catalogo->nombre = $request->nombre;
-        $catalogo->fh_catalogo = $fh_catalogo;
-        $catalogo->user = $user;
-        $catalogo->fn_ingreso = $fn_ingreso;
-        $catalogo->ip = $ip;
-        if ($catalogo->save()) {
+        $catalogo_dependencia = new Catalogo_dependencia();
+        $catalogo_dependencia->nombre = $request->nombre_dependencia;
+        $catalogo_dependencia->descripcion = $request->descripcion_dependencia;
+        $catalogo_dependencia->fn_catalogo_rol = $fn_catalogo_rol;
+        $catalogo_dependencia->user = $user;
+        $catalogo_dependencia->fn_ingreso = $fn_ingreso;
+        $catalogo_dependencia->ip = $ip;
+        if ($catalogo_dependencia->save()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Se ha registrado su ingreso, Bienvenido',
@@ -117,26 +81,51 @@ class CatalogoController extends Controller
         }
     }
 
-    public function inactivar_catalogo_items(Request $request)
+
+    public function guardar_catalogo_turno(Request $request)
     {
-        $catalogo_items = Catalogo_items::find($request->id_catalogo_item);
-        if ($catalogo_items) {
-            $catalogo_items->estado = !$catalogo_items->estado;
-            if ($catalogo_items->save()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'El estado del  catalogo ítem se ha actualizado correctamente.',
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Error al actualizar el estado',
-                ]);
-            }
-        } else {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre_turno' => 'required',
+                'inicio_hora' => 'required',
+                'fin_hora' => 'required',
+                'descripcion_turno' => 'required',
+            ],
+            [
+                'nombre_turno.required' => 'Debe ingresar nombre de tipo turno',
+                'inicio_hora.required' => 'Debe ingresar hora inicio',
+                'fin_hora.required' => 'Debe ingresar hora fin',
+                'descripcion_turno.required' => 'Debe ingresar un comentario',
+            ]
+        );
+
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No se puede cambiar de estado.',
+                'message' => 'Debe llenar todos los campos',
+            ]);
+        }
+
+        $fn_catalogo_turno = Carbon::now();
+        $fn_ingreso = Carbon::now();
+        $ip = $request->ip();
+        $user = $request->user()->name;
+
+        $catalogo_turno = new Catalogo_turno();
+        $catalogo_turno->nombre = $request->nombre_turno;
+        $catalogo_turno->inicio_hora = $request->inicio_hora;
+        $catalogo_turno->fin_hora = $request->fin_hora;
+        $catalogo_turno->descripcion = $request->descripcion_turno;
+        $catalogo_turno->fn_catalogo_turno = $fn_catalogo_turno;
+        $catalogo_turno->user = $user;
+        $catalogo_turno->fn_ingreso = $fn_ingreso;
+        $catalogo_turno->ip = $ip;
+        if ($catalogo_turno->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha registrado su ingreso, Bienvenido',
             ]);
         }
     }
