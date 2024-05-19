@@ -49,7 +49,7 @@
             <h3 class="page__heading">Formulario</h3>
         </div>
         <div class="section-body">
-            <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="row justify-content-center align-items-center">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\baseModel;
 use App\Models\SistemaTurnos\Vw_usuarios;
 use App\Models\SistemaTurnos\Catalogo_rol;
+use App\Models\SistemaTurnos\Persona;
 use App\Models\User;
 use Carbon\Carbon;
 use Validator;
@@ -142,9 +143,29 @@ class UsuariosController extends Controller
     public function asignacion_rol(Request $request, $encryptedId)
     {
         $id = decrypt($encryptedId);
+
         $usuario = Vw_usuarios::where('id', $id)->first();
         $this->pageData['usuario'] = $usuario;
 
+        $cui  =  $usuario->cui;
+
+        if ($cui) {
+            $persona_alta = Persona::where('cui', $cui)->first();
+            if ($persona_alta) {
+                switch ($persona_alta->estado) {
+                    case 1:
+                        $persona_alta->estado = 'Alta';
+                        break;
+                    case 2:
+                        $persona_alta->estado = 'Vacaciones';
+                        break;
+                    case 3:
+                        $persona_alta->estado = 'Baja';
+                        break;
+                }
+            }
+            $this->pageData['persona_alta'] = $persona_alta;
+        }
 
         $estado = [
             true => 'Activo',

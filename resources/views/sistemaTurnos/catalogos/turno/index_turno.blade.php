@@ -52,7 +52,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Lista Catalogo Dependencia</h3>
+            <h3 class="page__heading">Lista Catalogo Turnos</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -125,7 +125,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white  text-center">
-                    <h5 class="modal-title  mx-auto">Nuevo Catálogo</h5>
+                    <h5 class="modal-title  mx-auto">Nuevo Turno</h5>
                 </div>
                 <div class="modal-body">
 
