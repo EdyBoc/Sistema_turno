@@ -13,7 +13,7 @@ use Storage;
 use View;
 
 
-class DependenciaController extends Controller
+class AsignacionRolController extends Controller
 {
 
     public function index()

@@ -1,36 +1,6 @@
 @extends('layouts.app')
 @section('page_css')
     <style>
-        .table thead th {
-            background-color: #6b6e86;
-            color: rgb(255, 255, 255);
-            /* Color de fondo azul claro */
-        }
-
-        /* Estilo para la tabla */
-        .table {
-            border-collapse: separate;
-            width: 100%;
-            border-radius: 10px;
-            /* Borde redondeado para la tabla */
-            overflow: hidden;
-            /* Para que los bordes redondeados se vean correctamente */
-        }
-
-        /* Estilo para las celdas de la tabla */
-        .table th,
-        .table td {
-            border: 1px solid #dddddd;
-            padding: 10px;
-            /* Ajuste el espaciado de las celdas aquí */
-        }
-
-        /* Estilo para las filas impares */
-        .table tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-            color: black;
-        }
-
         /* Estilo para la fila de detalles */
         .detalles {
             background-color: #ffffff;
@@ -59,7 +29,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h4 class="page__heading">Recursos Humanos</h4>
+            <h4 class="page__heading">Modulo de Autorizacion</h4>
         </div>
         <div class="section-body">
             <div class="row">
@@ -67,33 +37,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <a class="btn btn-primary btn-lg" href="{{ route('lista_personas') }}">
-                                    <i class="fas fa-street-view"></i> Lista personas
-                                </a>
-                                <a class="btn btn-primary btn-lg" href="{{ route('index_vacaciones') }}">
+                                <a class="btn btn-primary btn-lg">
                                     <i class="fas fa-street-view"></i> Vacaciones
                                 </a>
-                                <a class="btn btn-primary btn-lg" href="{{ route('index_autorizacion') }}">
+                                <a class="btn btn-primary btn-lg">
                                     <i class="fas fa-street-view"></i> Solicitudes
                                 </a>
 
                                 <a class="btn btn-primary btn-lg">
                                     <i class="fas fa-street-view"></i> Horas Extras
-                                </a>
-
-                                <a href="#" class="notification-icon">
-                                    <i class="fas fa-bell" style="font-size: 23px;"></i>
-                                    @if ($totalReporteHoras > 0)
-                                        <span class="badge"
-                                            title="Autorizacion de horas Pendientes">{{ $totalReporteHoras }}</span>
-                                    @endif
-                                </a>
-                                <a href="#" class="notification-icon">
-                                    <i class="fas fa-bell" style="font-size: 23px;"></i>
-                                    @if ($totalSolicitudes > 0)
-                                        <span class="badge"
-                                            title="Autorizacion de horas Pendientes">{{ $totalSolicitudes }}</span>
-                                    @endif
                                 </a>
                             </div>
                         </div>
