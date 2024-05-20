@@ -82,5 +82,5 @@ Route::post('/guardar_horas', [App\Http\Controllers\SistemaTurnos\PerfilControll
 
 
 Route::get('/autorizacion_horas', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacion_horas'])->name('autorizacion_horas');
-Route::get('/autorizacion_solicitud', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacio_solicitudxtras'])->name('autorizacion_solicitud');
+Route::get('/autorizacion_solicitud', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacio_solicitud'])->name('autorizacion_solicitud');
 Route::get('/index_autorizacion', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacion'])->name('index_autorizacion');

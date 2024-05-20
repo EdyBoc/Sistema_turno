@@ -37,14 +37,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <a class="btn btn-primary btn-lg">
-                                    <i class="fas fa-street-view"></i> Vacaciones
-                                </a>
-                                <a class="btn btn-primary btn-lg">
-                                    <i class="fas fa-street-view"></i> Solicitudes
+                                <a class="btn btn-primary btn-lg" href="{{ route('autorizacion_solicitud') }}">
+                                    <i class="fas fa-street-view"></i> Solicitudes de Permisos y Vacaciones
                                 </a>
 
-                                <a class="btn btn-primary btn-lg">
+                                <a class="btn btn-primary btn-lg" href="{{ route('autorizacion_horas') }}">
                                     <i class="fas fa-street-view"></i> Horas Extras
                                 </a>
                             </div>

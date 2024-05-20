@@ -77,10 +77,6 @@
                                     <i class="fas fa-street-view"></i> Solicitudes
                                 </a>
 
-                                <a class="btn btn-primary btn-lg">
-                                    <i class="fas fa-street-view"></i> Horas Extras
-                                </a>
-
                                 <a href="#" class="notification-icon">
                                     <i class="fas fa-bell" style="font-size: 23px;"></i>
                                     @if ($totalReporteHoras > 0)
