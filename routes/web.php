@@ -44,13 +44,22 @@ Route::group(['middleware' => ['auth']], function () {
 });
 //usuarios
 Route::get('/index_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'usuarios'])->name('index_usuario');
-Route::post('/listar_usuarios', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'listar_usuarios'])->name('listar_usuarios');
-Route::get('/asignacion_roles/{id?}', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'asignacion_rol'])->name('detalle_rol_asignacion');
+Route::get('/filtar_datos_usuario_rol', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'filtar_datos_usuario_rol'])->name('filtar_datos_usuario_rol');
+Route::get('/consulta_recursos_humanos', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'consulta_recursos_humanos'])->name('consulta_recursos_humanos');
+Route::post('/guardar_asignacion_rol', [App\Http\Controllers\SistemaTurnos\UsuariosController::class, 'guardar_asignacion_rol'])->name('guardar_asignacion_rol');
+
 //marcaje usuario
-Route::post('/guardar_campos_requerimiento', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_ingreso'])->name('guardar_campos_requerimiento');
+Route::post('/guardar_campos_entrada', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_ingreso'])->name('guardar_campos_entrada');
 Route::post('/guardar_campos_salida', [App\Http\Controllers\SistemaTurnos\AsistenciaController::class, 'marcaje_salida'])->name('guardar_campos_salida');
 //asingaciones
 Route::get('/index_asignacion', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'asignacion'])->name('index_asignacion');
+Route::get('/index_asignacion_dependencia', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'view_asignacion_dependencia'])->name('index_asignacion_dependencia');
+Route::post('/guardar_asignacion_dependencia', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'guardar_asignacion_dependencia'])->name('guardar_asignacion_dependencia');
+Route::get('/filtar_usuarios', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'filtar_datos_usuario'])->name('filtar_usuarios');
+Route::get('/index_asignacion_turno', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'view_asignacion_turno'])->name('index_asignacion_turno');
+Route::get('/filtar_datos_usuario_turno', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'filtar_datos_usuario_turno'])->name('filtar_datos_usuario_turno');
+Route::post('/guardar_asignacion_turno', [App\Http\Controllers\SistemaTurnos\AsignacionController::class, 'guardar_asignacion_turno'])->name('guardar_asignacion_turno');
+
 //Catalogos
 Route::get('/index_catalogo', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'catalogo'])->name('index');
 Route::get('/index_dependencia', [App\Http\Controllers\SistemaTurnos\CatalogoController::class, 'view_catalogo_dependencia'])->name('index_dependencia');
@@ -78,9 +87,13 @@ Route::get('/index_horas_extras', [App\Http\Controllers\SistemaTurnos\PerfilCont
 Route::get('/index_solicitudes', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'view_solicitudes'])->name('index_solicitudes');
 Route::post('/guardar_solicitud', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_solicitud'])->name('guardar_solicitud');
 Route::post('/guardar_horas', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_reporte_horas'])->name('guardar_horas');
+Route::post('/anular_solicitud_horas', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'anular_solicitud_horas'])->name('anular_solicitud_horas');
+
+
+//Credenciales de Usuario
+Route::post('/guardar_credenciales', [App\Http\Controllers\SistemaTurnos\PerfilController::class, 'guardar_credenciales'])->name('guardar_credenciales');
+
 //Autorizaciones
-
-
 Route::get('/autorizacion_horas', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacion_horas'])->name('autorizacion_horas');
 Route::get('/autorizacion_solicitud', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacio_solicitud'])->name('autorizacion_solicitud');
 Route::get('/index_autorizacion', [App\Http\Controllers\SistemaTurnos\AutorizacionController::class, 'view_autorizacion'])->name('index_autorizacion');

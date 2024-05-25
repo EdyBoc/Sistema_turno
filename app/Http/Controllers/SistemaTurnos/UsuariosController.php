@@ -10,6 +10,8 @@ use App\Models\baseModel;
 use App\Models\SistemaTurnos\Vw_usuarios;
 use App\Models\SistemaTurnos\Catalogo_rol;
 use App\Models\SistemaTurnos\Persona;
+use App\Models\SistemaTurnos\roles;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 use Validator;
@@ -34,149 +36,158 @@ class UsuariosController extends Controller
 
     public function usuarios(Request $request)
     {
-        return view('sistemaTurnos.usuario.index_usuario');
+
+        $usuarios = vw_usuarios::pluck('name', 'id');
+        $this->pageData['usuarios'] = $usuarios;
+
+        $catalogo_rol = Catalogo_rol::pluck('nombre', 'id_catalogo_rol');
+        $this->pageData['catalogo_rol'] = $catalogo_rol;
+
+        return view('sistemaTurnos.usuario.index_usuario', $this->pageData);
     }
 
-    public function listar_usuarios(request $request)
+
+
+    public function filtar_datos_usuario_rol(Request $request)
     {
-        //DataTable contador de renderizacion
-        $dataTablesResponse['draw'] = intval($request->draw);
 
-        //obtengo datos de paginacion
-        $limit = ($request->length != '') ? $request->length : false;
-        $offset = $request->start;
-        $order = $request->order;
+        $id_usuario = $request->input('id_usuario');
 
-        $tableCols = array(
-            'No.',
-            'Nombre',
-            'Correo Electronico',
-            'Rol',
-        );
+        $asignacione_rols = roles::where('id_usuario', $id_usuario)->get();
 
-        //limit
-        if (!$limit) {
-            $limit = config('constantes.datatableDefaultRows');
-        }
+        if ($asignacione_rols) {
 
-        //offset
-        if (!$offset) {
-            $offset = 0;
-        }
+            foreach ($asignacione_rols as $asignacion_rol) {
 
-        // DEFINO LAS COLUMNAS QUE FORMARN EL LISTADO
-        $columns = [
-            'No.',
-            'Nombre',
-            'Correo Electronico',
-            'Rol',
-        ];
+                $nombre_rol = Catalogo_rol::where('id_catalogo_rol', $asignacion_rol->id_catalogo_rol)
+                    ->value('nombre');
+
+                $nombre_usuario = vw_usuarios::where('id', $asignacion_rol->id_usuario)
+                    ->value('name');
+
+                $asignacion_rol->nombre_rol = $nombre_rol;
+                $asignacion_rol->nombre_usuario = $nombre_usuario;
 
 
-        if (isset($request->estado) && $request->estado !== '') {
-            $query = Vw_usuarios::query()->where('esta_activo', filter_var($request->estado, FILTER_VALIDATE_BOOLEAN));
-        } else {
-
-            $query = Vw_usuarios::query();
-        }
-
-        // Verificar si se proporciona un avanzado de búsqueda
-        if (isset($request->avanzado) && $request->avanzado != '') {
-            // Aplicar la condición de búsqueda si se proporciona un avanzado
-            $query->where(function ($query) use ($request) {
-                $avanzado = $request->avanzado;
-                $query->where('name', 'like', "%$avanzado%")
-                    ->orWhere('email', 'like', "%$avanzado%");
-            });
-        }
-
-        // Obtener los resultados
-        $registros = $query->orderBy('name', 'desc')->get();
-
-        // OBTENGO EL TOTAL DE REGISTROS INCLUIDOS EN LA LISTA=
-        $total = $registros->count();
-
-        // CONSTRUYO LA LISTA EN FORMATO HTML
-        $results = [];
-
-        if ($offset != 0) {
-            $fila = $offset + 1;
-        }
-
-        $contador = ($offset > 0) ? $offset + 1 : 1;
-        foreach ($registros as $registro => $item) {
-
-
-            $linkEditar = '<a
-                    title="Editar "
-                    data-toggle="tooltip"
-                    data-original-title="Prioridad"
-                    class="btnUPD"
-                    href="' . route("detalle_rol_asignacion", ['id' => encrypt($item->id)]) . '"
-                    > <i class="fas fa-edit listaIcon"></i></a>';
-
-            $name = $item->name;
-            $email = $item->email;
-            $nombre_rol = $item->nombre_rol;
-            $estado = $item->estado;
-
-            $results[] = [
-                '<div style="text-align:center;" class="orden">' . $contador . '</div>',
-                '<div style="text-align:center;" class="orden">' . $name . '</div>',
-                '<div style="text-align:center;" class="orden">' . $email . '</div>',
-                '<div style="text-align:center;" class="orden">' . $nombre_rol . '</div>',
-                '<div style="text-align:center;" class="orden">' . $estado . '</div>',
-                '<div style="text-align:center; width:100%;">' . $linkEditar . '</div>'
-
-            ];
-            $contador++;
-        }
-        $response = [
-            'data' => $results,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $total,
-        ];
-
-        return response()->json($response);
-    }
-
-    public function asignacion_rol(Request $request, $encryptedId)
-    {
-        $id = decrypt($encryptedId);
-
-        $usuario = Vw_usuarios::where('id', $id)->first();
-        $this->pageData['usuario'] = $usuario;
-
-        $cui  =  $usuario->cui;
-
-        if ($cui) {
-            $persona_alta = Persona::where('cui', $cui)->first();
-            if ($persona_alta) {
-                switch ($persona_alta->estado) {
-                    case 1:
-                        $persona_alta->estado = 'Alta';
-                        break;
-                    case 2:
-                        $persona_alta->estado = 'Vacaciones';
-                        break;
-                    case 3:
-                        $persona_alta->estado = 'Baja';
-                        break;
+                if ($asignacion_rol->estado === 1) {
+                    $asignacion_rol->estado = 'Activo';
+                } elseif ($asignacion_rol->estado === 0) {
+                    $asignacion_rol->estado = 'Inactivo';
                 }
             }
-            $this->pageData['persona_alta'] = $persona_alta;
         }
 
-        $estado = [
-            true => 'Activo',
-            false => 'Inactivo'
-        ];
-        $this->pageData['estado'] = $estado;
 
-        $rol = Catalogo_rol::pluck('nombre', 'id_catalogo_rol');
+        $datos = [];
 
-        $this->pageData['rol'] = $rol;
+        foreach ($asignacione_rols as $asignacion) {
 
-        return view('sistemaTurnos.usuario.detalle_rol_asignacion', $this->pageData);
+            $datos[] = [
+                'nombre_usuario' => $asignacion->nombre_usuario,
+                'nombre_rol' => $asignacion->nombre_rol,
+                'fh_asignacion' => $asignacion->fh_asignacion,
+                'estado' => $asignacion->estado
+            ];
+        }
+        return response()->json($datos);
+    }
+
+
+
+    public function consulta_recursos_humanos(Request $request)
+    {
+
+        $id_usuario = $request->input('id_usuario');
+
+        $usuario = Vw_usuarios::where('id', $id_usuario)->first();
+
+        if (!$usuario) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontro al usuario',
+            ]);
+        }
+
+        $persona_alta = Persona::where('cui', $usuario->cui)->first();
+        if (!$persona_alta) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El usuario no esta de alta en Recursos Humano.',
+            ]);
+        }
+
+        switch ($persona_alta->estado) {
+            case 1:
+                $persona_alta->estado = 'Alta';
+                break;
+            case 2:
+                $persona_alta->estado = 'Vacaciones';
+                break;
+            case 3:
+                $persona_alta->estado = 'Baja';
+                break;
+        }
+
+        return response()->json([
+            'success' => true,
+            'id_persona' => $persona_alta->id_persona,
+            'nombre_completo' => $persona_alta->nombre_completo,
+            'cui' => $persona_alta->cui,
+            'fh_contratado' => $persona_alta->fh_contratado,
+            'estado' => $persona_alta->estado
+        ]);
+    }
+
+
+    public function guardar_asignacion_rol(Request $request)
+    {
+
+        $userId = Auth::id();
+        $fh_asignacion = Carbon::now();
+        $fn_ingreso = Carbon::now();
+        $ip = $request->ip();
+        $user = $request->user()->name;
+
+        roles::where('id_usuario', $request->id_usuario)
+            ->where('estado', true)
+            ->update(['estado' => false]);
+
+
+        $existenteAsignacion = roles::where('id_usuario', $request->id_usuario)
+            ->where('id_catalogo_rol', $request->id_catalogo_rol)
+            ->first();
+
+
+        if ($existenteAsignacion) {
+            $existenteAsignacion->fh_asignacion = $fh_asignacion;
+            $existenteAsignacion->id_persona = $request->id_persona;
+            $existenteAsignacion->estado = true;
+            $existenteAsignacion->user = $user;
+            $existenteAsignacion->fn_ingreso = $fn_ingreso;
+            $existenteAsignacion->ip = $ip;
+            if ($existenteAsignacion->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Se actualizo su asignacion turno',
+                ]);
+            }
+        } else {
+
+            $asignacion_turno = new roles();
+            $asignacion_turno->id_catalogo_rol = $request->id_catalogo_rol;
+            $asignacion_turno->id_persona = $request->id_persona;
+            $asignacion_turno->id_usuario = $request->id_usuario;
+            $asignacion_turno->fh_asignacion = $fh_asignacion;
+            $asignacion_turno->estado = true;
+            $asignacion_turno->user = $user;
+            $asignacion_turno->fn_ingreso = $fn_ingreso;
+            $asignacion_turno->ip = $ip;
+            if ($asignacion_turno->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Se ha registrado su asignacion turno',
+                ]);
+            }
+        }
     }
 }

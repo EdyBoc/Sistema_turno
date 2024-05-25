@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SistemaTurnos\Autorizacion;
 use App\Models\SistemaTurnos\ReporteHoras;
+use App\Models\SistemaTurnos\Codigo_ingreso;
 use App\Models\SistemaTurnos\Solicitud;
 use Illuminate\Support\Facades\Auth;
 use App\Models\baseModel;
@@ -149,6 +150,57 @@ class PerfilController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Se ha registrado su ingreso, Bienvenido',
+            ]);
+        }
+    }
+
+
+    public function anular_solicitud_horas(Request $request)
+    {
+
+        $reportehoras = ReporteHoras::where('id_reporte_horas', $request->id_reporte_horas)->first();
+        if ($reportehoras) {
+            $reportehoras->estado = false;
+            if ($reportehoras->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Se ha anulado el reporte de horas',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Solicitud de horas no encontrada',
+            ]);
+        }
+    }
+
+    public function guardar_credenciales(Request $request)
+    {
+
+        $userId = Auth::id();
+        $fh_asignacion = Carbon::now();
+        $fn_ingreso = Carbon::now();
+        $ip = $request->ip();
+        $user = $request->user()->name;
+
+        Codigo_ingreso::where('id_usuario', $userId)
+            ->where('estado', true)
+            ->update(['estado' => false]);
+
+
+        $codigo_ingreso = new Codigo_ingreso();
+        $codigo_ingreso->id_usuario = $userId;
+        $codigo_ingreso->codigo = $request->id_credencial;
+        $codigo_ingreso->user = $user;
+        $codigo_ingreso->fn_ingreso = $fn_ingreso;
+        $codigo_ingreso->estado = true;
+        $codigo_ingreso->ip = $ip;
+        if ($codigo_ingreso->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha registrado su asignacion turno',
+                'clave' => $codigo_ingreso->codigo
             ]);
         }
     }

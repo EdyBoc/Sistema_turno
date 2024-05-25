@@ -1,30 +1,30 @@
-CREATE TABLE asignacion_turno (
+    CREATE TABLE asignacion_turno (
     id_asignacion_turno INT PRIMARY KEY AUTO_INCREMENT,
-    id_catalogo_item INT NOT NULL,
+    id_catalogo_turno INT NOT NULL,
     id_usuario INT NOT NULL,
-    fh_asignacion_dependencia DATETIME NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
+    fh_asignacion DATE NOT NULL,
+    estado BOOLEAN,
     user varchar(191),
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
-    FOREIGN KEY (id_catalogo_item) REFERENCES catalogo_items(id_catalogo_item),
+    FOREIGN KEY (id_catalogo_turno) REFERENCES Catalogo_turno(id_catalogo_turno),
     FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
 
- CREATE TABLE Asignaciones (
-    id_asignacion INT PRIMARY KEY AUTO_INCREMENT,
-    id_turno INT NOT NULL,
-    id_catalogo_item INT NOT NULL,
-    fh_asignacion DATE NOT NULL,
+
+ CREATE TABLE Asignacion_dependencia (
+    id_asignacion_dependencia INT PRIMARY KEY AUTO_INCREMENT,
+    id_catalogo_dependencia INT NOT NULL,
     id_usuario INT NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
+    fh_asignacion DATE NOT NULL,
+    estado BOOLEAN,
     user varchar(191),
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
     ip VARCHAR(15) ,
-    FOREIGN KEY (id_catalogo_item) REFERENCES catalogo_items(id_catalogo_item),
+    FOREIGN KEY (id_catalogo_dependencia) REFERENCES Catalogo_dependencia(id_catalogo_dependencia),
     FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
@@ -84,33 +84,30 @@ CREATE TABLE asignacion_turno (
     );
 
 
-
---Esta tabla es funcional
-    CREATE TABLE catalogo (
-        id_catalogo INT PRIMARY KEY AUTO_INCREMENT,
-        nombre VARCHAR(255) NOT NULL,
-        fh_catalogo DATETIME NOT NULL,
-        user varchar(191),
-        fn_ingreso datetime ,
-        fn_ultima_modificacion datetime ,
-        ip VARCHAR(15)
-    );
-
-
---Esta tabla es funcional
-    CREATE TABLE catalogo_items (
-    id_catalogo_item INT PRIMARY KEY AUTO_INCREMENT,
-    id_catalogo INT NOT NULL,
+   CREATE TABLE Catalogo_turno (
+    id_catalogo_turno INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
-    fh_catalogo_items DATETIME NOT NULL,
-    fn_ingreso datetime ,
+    inicio_hora TIME NOT NULL,
+    fin_hora TIME NOT NULL,
+    descripcion TEXT NOT NULL,
+    fn_catalogo_turno DATE NOT NULL,
     user varchar(191),
+    fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
-    ip VARCHAR(15) ,
-    CONSTRAINT FK_catalogo_items_catalgo FOREIGN KEY (id_catalogo) REFERENCES catalogo(id_catalogo)
+    ip VARCHAR(15)
     );
 
+
+    CREATE TABLE Catalogo_dependencia (
+    id_catalogo_dependencia INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
+    fn_catalogo_rol DATE NOT NULL,
+    user varchar(191),
+    fn_ingreso datetime ,
+    fn_ultima_modificacion datetime ,
+    ip VARCHAR(15)
+    );
 
 
 --Esta tabla es funcional
@@ -132,9 +129,9 @@ CREATE TABLE asignacion_turno (
     id_roles INT PRIMARY KEY AUTO_INCREMENT,
     id_catalogo_rol INT NOT NULL,
     id_usuario INT NOT NULL,
-    id_persona INT NOT NULL,
-    fecha_control DATETIME NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
+    id_persona INT,
+    fh_asignacion DATETIME NOT NULL,
+    estado BOOLEAN ,
     user varchar(191),
     fn_ingreso datetime ,
     fn_ultima_modificacion datetime ,
@@ -242,3 +239,17 @@ CREATE TABLE asignacion_turno (
         ip VARCHAR(15) ,
         FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
+
+
+    CREATE TABLE codigo_ingreso (
+        id_codigo_ingreso INT PRIMARY KEY AUTO_INCREMENT,
+        id_usuario INT NOT NULL,
+        codigo INT NOT NULL,
+        estado BOOLEAN,
+        user varchar(191),
+        fn_ingreso datetime ,
+        fn_ultima_modificacion datetime ,
+        ip VARCHAR(15) ,
+        FOREIGN KEY (id_usuario) REFERENCES users(id)
+    );
+

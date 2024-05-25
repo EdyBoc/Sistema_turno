@@ -10,7 +10,7 @@
             <i class="fas fa-clipboard-list"></i><span>Asignación</span>
         </a>
         <a class="nav-link" href="/index_perfil">
-            <i class="fas fa-walking"></i><span>Trabajador</span>
+            <i class="fas fa-walking"></i><span>Gestion de Usuario</span>
         </a>
         <a class="nav-link" href="index_listar">
             <i class="fas fa-paperclip"></i><span>Recursos Humanos</span>

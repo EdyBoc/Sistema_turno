@@ -16,8 +16,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
-                                <a class="btn btn-primary"><i class="fas fa-business-time"></i>Dependencia</a>
-                                <a class="btn btn-primary"><i class="fas fa-business-time"></i></i>Turno</a>
+                                <a class="btn btn-primary" href="{{ route('index_asignacion_dependencia') }}"><i
+                                        class="fas fa-business-time"></i>Dependencia</a>
+                                <a class="btn btn-primary" href="{{ route('index_asignacion_turno') }}"><i
+                                        class="fas fa-business-time"></i></i>Turno</a>
                                 <a class="btn btn-primary " href="{{ route('index_usuario') }}"><i
                                         class="fas fa-user-lock"></i>
                                     Asignar Rol</a>

@@ -37,9 +37,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reportehoras as $reportehora)
+                                        @foreach ($reportehoras as $index => $reportehora)
                                             <tr>
-                                                <td style="text-align: center;">{{ $reportehora->id_reporte_horas }}</td>
+                                                <td style="text-align: center;">{{ $index + 1 }}</td>
                                                 <td style="text-align: center;">{{ $reportehora->inicio_hora }}</td>
                                                 <td style="text-align: center;">{{ $reportehora->fin_hora }}</td>
                                                 <td style="text-align: center;">{{ $reportehora->fecha_reporte_horas }}</td>
@@ -51,9 +51,12 @@
                                                 @else
                                                     red; @endif
                                                 ">
-                                                    <strong>{{ $reportehora->estado }}</strong></td>
+                                                    <strong>{{ $reportehora->estado }}</strong>
+                                                </td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-primary btn-sm text-center" title="Anular solicitud">
+                                                    <a href="#" class="btn text-center anular-solicitud"
+                                                        data-id="{{ $reportehora->id_reporte_horas }}"
+                                                        title="Anular solicitud">
                                                         <i class="fas fa-times-circle"></i>
                                                     </a>
                                                 </td>
@@ -149,5 +152,32 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+            $(".anular-solicitud").click(function(e) {
+                e.preventDefault();
+                var id_reporte_horas = $(this).data('id');
+                anularSolicitud(id_reporte_horas);
+            });
+        });
+
+        function anularSolicitud(id_reporte_horas) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('anular_solicitud_horas') }}",
+                data: {
+                    id_reporte_horas: id_reporte_horas,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (!response.success) {
+                        toastr.error(response.message);
+                    } else {
+                        toastr.success(response.message);
+                        location.reload();
+                    }
+                }
+            });
+        }
     </script>
 @endsection

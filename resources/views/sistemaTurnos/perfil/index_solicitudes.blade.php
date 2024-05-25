@@ -38,23 +38,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($solicitudes as $solicitud)
+                                        @foreach ($solicitudes as $index => $solicitud)
                                             <tr>
+                                                <td style="text-align: center;">{{ $index + 1 }}</td>
                                                 <td style="text-align: center;">{{ $solicitud->id_solicitud }}</td>
                                                 <td style="text-align: center;">{{ $solicitud->tipo_solicitud }}</td>
                                                 <td style="text-align: center;">{{ $solicitud->fecha_solicitud }}</td>
                                                 <td style="text-align: center;">{{ $solicitud->obervacion }}</td>
-                                                <td style="text-align: center; color:
-                                                @if ($solicitud->estado === 'Autorizado')
-                                                    green;
+                                                <td
+                                                    style="text-align: center; color:
+                                                @if ($solicitud->estado === 'Autorizado') green;
                                                 @elseif ($solicitud->estado === 'No autorizado')
                                                     blue;
                                                 @else
-                                                    red;
-                                                @endif
-                                                "><strong>{{ $solicitud->estado }}</strong></td>
+                                                    red; @endif
+                                                ">
+                                                    <strong>{{ $solicitud->estado }}</strong></td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-primary btn-sm text-center" title="Anular solicitud">
+                                                    <a href="#" class="btn text-center anular-solicitud"
+                                                        data-id="{{ $solicitud->id_solicitud }}" title="Anular solicitud">
                                                         <i class="fas fa-times-circle"></i>
                                                     </a>
                                                 </td>
@@ -130,6 +132,15 @@
                         location.reload();
                     }
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $(".anular-solicitud").click(function(e) {
+                e.preventDefault();
+                var id_solicitud = $(this).data('id');
+                //anularSolicitud(id_solicitud);
+                console.log("Anulando solicitud con ID: " + id_solicitud);
             });
         });
     </script>
