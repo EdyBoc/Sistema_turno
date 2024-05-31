@@ -48,9 +48,9 @@
                                                 <td style="text-align: center;">{{ $persona->estado }}</td>
                                                 <td style="text-align: center;">{{ $persona->fh_contratado }}</td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-primary btn-sm text-center" title="Anular solicitud">
-                                                        <i class="fas fa-times-circle"></i>
-                                                    </a>
+                                                    <a href="{{ route('index_alta', ['id' => $persona->id_persona]) }}"
+                                                        class="btn text-center"> <i
+                                                            class="fas fa-edit text-primary"></i>Editar</a>
                                                 </td>
                                             </tr>
                                         @endforeach

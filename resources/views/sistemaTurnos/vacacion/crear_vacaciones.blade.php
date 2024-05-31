@@ -3,103 +3,118 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Vacaciones| crear</h3>
+            <h3 class="page__heading">Formulario| crear</h3>
         </div>
         <div class="section-body">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <div class="justify-content-center text-center">
-                                <a class="btn btn-danger btn-lg" href="/index_vacaciones"><i
-                                        class="fa fa-times"></i>Cancelar</a>
-                                <a class="btn btn-primary btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
-                                    Actualizar</a>
-                                <a class="btn btn-primary btn-lg" id="btn_consultar"> Consultar</a>
-                            </div>
-                            <div class="row mt-1">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="exampleSelect">Selecciona Trabajador:</label>
-                                        {{ Form::select('persona', @$persona, null, ['id' => 'persona', 'class' => 'form-control ', 'placeholder' => 'Seleccione...']) }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nombre">Edad:</label>
-                                        <input type="number" class="form-control" id="edad" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="for_fecha_contratado">fecha Ingreso:</label>
-                                        <input type="date" class="form-control" id="fecha_contratado" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="for_correo_electronico">Correo Electronico:</label>
-                                        <input type="text" class="form-control" id="correo_electronico" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="">Formulario de Autorizacion</label>
-                                <details class="col-lg-12">
-                                    <summary>Detalles</summary>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                            <input type="hidden" class="form-control" id="id_catalogo_editar">
-                                            <div class="form-group">
-                                                <label for="nombre">Emisor:</label>
-                                                <input type="text" class="form-control" id="nombre_catalogo">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="nombre">Seleccione autizacion:</label>
-                                                <input type="text" class="form-control" id="descripcion_catalogo"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="nombre">Periodo de Vacaciones:</label>
-                                                <input type="date" class="form-control" id="descripcion_catalogo"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                            <input type="hidden" class="form-control" id="id_catalogo_editar">
-                                            <div class="form-group">
-                                                <label for="nombre">diaz Gozados:</label>
-                                                {{ Form::select('dia_gozado', @$dias, null, ['id' => 'id_gozados', 'class' => 'form-control ', 'placeholder' => 'Seleccione...']) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="nombre">dias rezagados:</label>
-                                                <input type="number" class="form-control" id="descripcion_catalogo"
+                            <div class="justify-content-center text-center">
+                                <h5 class="page__heading">Asignar</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+                                        <div class="form-group">
+                                            <label for="nombre_completo">Nombre Completo:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="nombre_completo"
+                                                    name="nombre_completo"
+                                                    value="{{ isset($persona) ? $persona->nombre_completo : null }}"
                                                     readonly>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Nombre Completo">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="nombre">fecha inicio:</label>
-                                                <input type="date" class="form-control" id="descripcion_catalogo">
+
+                                        <div class="form-group">
+                                            <label for="fecha_contratado">Fecha Contratado:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="fecha_contratado"
+                                                    name="fecha_contratado"
+                                                    value="{{ isset($persona) ? $persona->fh_contratado : null }}" readonly>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Contratado">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="nombre">fecha finlizado:</label>
-                                                <input type="date" class="form-control" id="descripcion_catalogo">
+
+                                        <div class="form-group">
+                                            <label for="fecha_contratado">Descripcion:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="descripcion"
+                                                    name="descripcion" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Contratado">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="correo_electronico">Correo Electrónico:</label>
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" id="correo_electronico"
+                                                    name="correo_electronico"
+                                                    value="{{ isset($persona) ? $persona->correo_electronico : null }}"
+                                                    readonly>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Correo Electrónico">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fecha_contratado">Fecha inicio:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="fn_inicio" name="fn_inicio">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Inicio">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fecha_contratado">Fecha fin:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="fn_fin" name="fn_fin">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha Fin">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="justify-content-center text-center">
-                                        <a href="#" id="btn_guardar_profesion" class="btn btn-warning btn-lg "><i
-                                                class="fas fa-plus-circle"></i>&nbsp;Guardar</a>
-                                    </div>
-                                </details>
+                                </div>
+                                <div class="justify-content-center text-center">
+                                    <a class="btn btn-danger btn-lg" href="{{ route('index_vacaciones') }}"><i
+                                            class="fas fa-reply"></i></i>Regrar</a>
+                                    <a href="#" id="btn_guardar_profesion" class="btn btn-warning btn-lg "><i
+                                            class="fas fa-plus-circle"></i>&nbsp;Guardar</a>
+
+                                </div>
                             </div>
                         </div>
                     </div>

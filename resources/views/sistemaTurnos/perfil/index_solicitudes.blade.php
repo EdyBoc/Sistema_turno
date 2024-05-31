@@ -53,7 +53,8 @@
                                                 @else
                                                     red; @endif
                                                 ">
-                                                    <strong>{{ $solicitud->estado }}</strong></td>
+                                                    <strong>{{ $solicitud->estado }}</strong>
+                                                </td>
                                                 <td style="text-align: center;">
                                                     <a href="#" class="btn text-center anular-solicitud"
                                                         data-id="{{ $solicitud->id_solicitud }}" title="Anular solicitud">
@@ -77,7 +78,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white  text-center">
-                    <h5 class="modal-title  mx-auto">Nuevo Catálogo</h5>
+                    <h5 class="modal-title  mx-auto">Nueva Solicitud</h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

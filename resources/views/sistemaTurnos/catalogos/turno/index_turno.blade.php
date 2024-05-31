@@ -2,50 +2,7 @@
 
 @section('page_css')
     <style>
-        .dropdown-menu {
-            min-width: auto;
-            width: auto;
-        }
 
-        .select-rounded {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .table thead th {
-            background-color: #6b6e86;
-            color: rgb(255, 255, 255);
-            /* Color de fondo azul claro */
-        }
-
-        /* Estilo para la tabla */
-        .table {
-            border-collapse: separate;
-            width: 100%;
-            border-radius: 10px;
-            /* Borde redondeado para la tabla */
-            overflow: hidden;
-            /* Para que los bordes redondeados se vean correctamente */
-        }
-
-        /* Estilo para las celdas de la tabla */
-        .table th,
-        .table td {
-            border: 1px solid #dddddd;
-            padding: 10px;
-            /* Ajuste el espaciado de las celdas aquí */
-        }
-
-        /* Estilo para las filas impares */
-        .table tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-            color: black;
-        }
-
-        .modal {
-            z-index: 1050;
-            /* Ajusta este valor según sea necesario */
-        }
     </style>
 @endsection
 
@@ -104,8 +61,18 @@
                                                     <td style="text-align: center;">{{ $catalogoturno->descripcion }} </td>
                                                     <td style="text-align: center;">{{ $catalogoturno->fn_catalogo_turno }}
                                                     </td>
-                                                    <td style="text-align: center;"><a id="editar_rol"><i
-                                                                class="fas fa-edit listaIcon"></i></a>
+
+                                                    <td style="text-align: center;">
+                                                        <a data-toggle="modal"
+                                                            data-target="#modal_add_catalogo_editar_turno"
+                                                            data-id="{{ $catalogoturno->id_catalogo_turno }}"
+                                                            data-nombre="{{ $catalogoturno->nombre }}"
+                                                            data-inicio_hora="{{ $catalogoturno->inicio_hora }}"
+                                                            data-fin_hora="{{ $catalogoturno->fin_hora }}"
+                                                            data-descripcion="{{ $catalogoturno->descripcion }}"
+                                                            class="btn text-center editar_turno">
+                                                            <i class="fas fa-edit text-primary"></i> Editar
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -176,14 +143,87 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a id="btnCerrar" onclick="$('#modal_add_catalogo_turno').modal('hide');"
                         class="btn btn-danger btn-lg"><i class="fa fa-times"></i>&nbsp;Cancelar</a>
                     &nbsp;
                     <a href="#" id="btn_guardar_catalogo_turno" class="btn btn-success btn-lg"><i
+                            class="fas fa-save"></i>&nbsp;Guardar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal nuevo Catalogo-->
+    <div class="modal fade" id="modal_add_catalogo_editar_turno" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white  text-center">
+                    <h5 class="modal-title  mx-auto">Editar Turno</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="id_catalogo_turno">
+
+                        <label for="fr_catalogo_nombre">Nombre</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="editar_nombre_turno">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Fecha Realizado">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fr_catalogo_nombre">Hora Inicio:</label>
+                        <div class="input-group">
+                            <input type="time" class="form-control" id="editar_incio_hora">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Hora Inicio">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fr_catalogo_nombre">Hora Final:</label>
+                        <div class="input-group">
+                            <input type="time" class="form-control" id="editar_fin_hora">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Hora Fin">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fr_catalogo_nombre">Descripcion</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="editar_descripcion_turno">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Fecha Realizado">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a id="btnCerrar" onclick="$('#modal_add_catalogo_editar_turno').modal('hide');"
+                        class="btn btn-danger btn-lg"><i class="fa fa-times"></i>&nbsp;Cancelar</a>
+                    &nbsp;
+                    <a href="#" id="btn_catalogo_editar_turno" class="btn btn-success btn-lg"><i
                             class="fas fa-save"></i>&nbsp;Guardar</a>
                 </div>
             </div>
@@ -212,6 +252,53 @@
                     inicio_hora: inicio_hora,
                     fin_hora: fin_hora,
                     descripcion_turno: descripcion_turno,
+                },
+                success: function(response) {
+                    if (!response.success) {
+                        toastr.error(response.message);
+                    } else {
+                        toastr.success(response.message);
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+
+        $(document).ready(function() {
+            $('.editar_turno').on('click', function() {
+                var id = $(this).data('id');
+                var nombre = $(this).data('nombre');
+                var inicio_hora = $(this).data('inicio_hora');
+                var fin_hora = $(this).data('fin_hora');
+                var descripcion = $(this).data('descripcion');
+
+                $('#id_catalogo_turno').val(id);
+                $('#editar_nombre_turno').val(nombre);
+                $('#editar_incio_hora').val(inicio_hora);
+                $('#editar_fin_hora').val(fin_hora);
+                $('#editar_descripcion_turno').val(descripcion);
+
+            });
+        });
+
+
+        $("#btn_catalogo_editar_turno").click(function(e) {
+            e.preventDefault();
+            var id_catalogo_turno = $("#id_catalogo_turno").val();
+            var editar_nombre_turno = $("#editar_nombre_turno").val();
+            var editar_incio_hora = $("#editar_incio_hora").val();
+            var editar_fin_hora = $("#editar_fin_hora").val();
+            var editar_descripcion_turno = $("#editar_descripcion_turno").val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('guardar_turno_editado') }}",
+                data: {
+                    id_catalogo_turno: id_catalogo_turno,
+                    editar_nombre_turno: editar_nombre_turno,
+                    editar_incio_hora: editar_incio_hora,
+                    editar_fin_hora: editar_fin_hora,
+                    editar_descripcion_turno: editar_descripcion_turno,
                 },
                 success: function(response) {
                     if (!response.success) {

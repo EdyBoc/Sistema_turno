@@ -37,6 +37,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
+
+                                <a class="btn btn-danger btn-lg" href="{{ route('index_listar') }}"><i
+                                        class="fas fa-reply"></i></i>Regrar</a>
+
                                 <a class="btn btn-primary btn-lg" href="{{ route('autorizacion_solicitud') }}">
                                     <i class="fas fa-street-view"></i> Solicitudes de Permisos y Vacaciones
                                 </a>

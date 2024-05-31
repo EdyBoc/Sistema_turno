@@ -74,4 +74,42 @@ class CatalogoRolController extends Controller
             ]);
         }
     }
+
+
+    public function guardar_rol_editado(Request $request)
+    {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'editado_nombre' => 'required',
+                'editado_descripcion' => 'required',
+            ],
+            [
+                'editado_nombre.required' => 'Debe ingresar nombre de Rol',
+                'editado_descripcion.required' => 'Debe ingresar descripcion de Rol',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Debe llenar todos los campos para editar',
+            ]);
+        }
+
+        $fn_catalogo_rol = Carbon::now();
+        $fn_ultima_modificacion = Carbon::now();
+
+        $catalogo_rol = Catalogo_rol::find($request->id_catalogo_rol);
+        $catalogo_rol->nombre = $request->editado_nombre;
+        $catalogo_rol->fn_catalogo_rol = $fn_catalogo_rol;
+        $catalogo_rol->descripcion = $request->editado_descripcion;
+        if ($catalogo_rol->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha registrado los campos editados con exito',
+            ]);
+        }
+    }
 }

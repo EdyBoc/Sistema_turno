@@ -28,7 +28,37 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h4 class="page__heading">Inicio</h4>
+            @if ($rol_usuario == 'Administrador')
+                <a class="nav-link" href="/index_catalogo">
+                    <i class="fas fa-book"></i><span> Catálogo</span>
+                </a>
+                <a class="nav-link" href="/index_asignacion">
+                    <i class="fas fa-clipboard-list"></i><span> Asignación</span>
+                </a>
+                <a class="nav-link" href="/index_listar">
+                    <i class="fas fa-paperclip"></i><span> Recursos Humanos</span>
+                </a>
+                <a class="nav-link" href="/index_reporte">
+                    <i class="fas fa-paperclip"></i><span> Repostería</span>
+                </a>
+            @elseif($rol_usuario == 'Coordinador')
+                <a class="nav-link" href="/index_asignacion">
+                    <i class="fas fa-clipboard-list"></i><span> Asignación</span>
+                </a>
+                <a class="nav-link" href="/index_listar">
+                    <i class="fas fa-paperclip"></i><span> Recursos Humanos</span>
+                </a>
+                <a class="nav-link" href="/index_reporte">
+                    <i class="fas fa-paperclip"></i><span> Repostería</span>
+                </a>
+            @elseif($rol_usuario == 'Empleado')
+                <a class="nav-link" href="/index_perfil">
+                    <i class="fas fa-walking"></i><span> Gestion de Usuario</span>
+                </a>
+            @else
+                <p>No tiene acceso a estas opciones</p>
+            @endif
+
         </div>
         <div class="section-body">
             <div class="row justify-content-center align-items-center">
@@ -44,7 +74,8 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control" id="codigo" name="codigo" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button" id="togglePassword" data-toggle="tooltip" title="Mostrar/Ocultar contraseña">
+                                        <button class="btn btn-secondary" type="button" id="togglePassword"
+                                            data-toggle="tooltip" title="Mostrar/Ocultar contraseña">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                     </div>

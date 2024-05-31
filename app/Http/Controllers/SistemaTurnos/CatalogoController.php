@@ -81,6 +81,45 @@ class CatalogoController extends Controller
         }
     }
 
+    public function guardar_dependencia_editado(Request $request)
+    {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'editar_nombre_dependencia' => 'required',
+                'editar_descripcion_dependencia' => 'required',
+            ],
+            [
+                'editar_nombre_dependencia.required' => 'Debe ingresar nombre de tipo dependencia',
+                'editar_descripcion_dependencia.required' => 'Debe ingresar un comentario',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Debe llenar todos los campos',
+            ]);
+        }
+
+        $fn_catalogo_rol = Carbon::now();
+        $fn_ultima_modificacion = Carbon::now();
+
+
+        $catalogo_dependencia = Catalogo_dependencia::find($request->id_catalogo_dependencia);
+        $catalogo_dependencia->nombre = $request->editar_nombre_dependencia;
+        $catalogo_dependencia->descripcion = $request->editar_descripcion_dependencia;
+        $catalogo_dependencia->fn_catalogo_rol = $fn_catalogo_rol;
+        $catalogo_dependencia->fn_ultima_modificacion = $fn_ultima_modificacion;
+        if ($catalogo_dependencia->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha registrado su ingreso, Bienvenido',
+            ]);
+        }
+    }
+
 
     public function guardar_catalogo_turno(Request $request)
     {
@@ -126,6 +165,50 @@ class CatalogoController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Se ha registrado su ingreso, Bienvenido',
+            ]);
+        }
+    }
+
+
+    public function guardar_turno_editado(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'editar_nombre_turno' => 'required',
+                'editar_incio_hora' => 'required',
+                'editar_fin_hora' => 'required',
+                'editar_descripcion_turno' => 'required',
+            ],
+            [
+                'editar_nombre_turno.required' => 'Debe ingresar nombre de tipo turno',
+                'editar_incio_hora.required' => 'Debe ingresar hora fin',
+                'editar_fin_hora.required' => 'Debe ingresar hora fin',
+                'editar_descripcion_turno.required' => 'Debe ingresar un comentario',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Debe llenar todos los campos',
+            ]);
+        }
+
+        $fn_catalogo_turno = Carbon::now();
+        $fn_ultima_modificacion = Carbon::now();
+
+        $catalogo_turno = Catalogo_turno::find($request->id_catalogo_turno);
+        $catalogo_turno->nombre = $request->editar_nombre_turno;
+        $catalogo_turno->inicio_hora = $request->editar_incio_hora;
+        $catalogo_turno->fin_hora = $request->editar_fin_hora;
+        $catalogo_turno->descripcion = $request->editar_descripcion_turno;
+        $catalogo_turno->fn_ultima_modificacion = $fn_ultima_modificacion;
+        $catalogo_turno->fn_catalogo_turno = $fn_catalogo_turno;
+        if ($catalogo_turno->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha editado turno con exito',
             ]);
         }
     }

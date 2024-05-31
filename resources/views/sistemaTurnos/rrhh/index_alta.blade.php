@@ -50,22 +50,24 @@
         </div>
         <div class="section-body">
             <div class="row justify-content-center align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="justify-content-center text-center">
                                 <h5 class="page__heading">Nueva Alta</h5>
-                                <div class="row">
-                                    <div class="col-md-6">
 
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="hidden" class="form-control" id="id_persona" name="id_persona"
+                                            value="{{ isset($persona) ? $persona->id_persona : null }}" required>
                                         <div class="form-group">
                                             <label for="cui">CUI:</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="cui" name="cui"
-                                                    required>
+                                                    value="{{ isset($persona) ? $persona->cui : null }}"
+                                                    @if (isset($persona->cui)) readonly @endif>
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip" title="CUI">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
@@ -73,83 +75,25 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="nombre_completo">Nombre Completo:</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="nombre_completo"
-                                                    name="nombre_completo" required>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
-                                                        <i class="fas fa-puzzle-piece"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="pais">pais:</label>
+                                            <label for="pais">País:</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="pais" name="pais"
-                                                    required>
+                                                    value="{{ isset($persona) ? $persona->pais : null }}" required>
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip" title="País">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="departamento">Departamento:</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="departamento"
-                                                    name="departamento" required>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
-                                                        <i class="fas fa-puzzle-piece"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <label for="nit">NIT:</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="nit" name="nit"
-                                                    required>
+                                                    value="{{ isset($persona) ? $persona->nit : null }}" required>
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
-                                                        <i class="fas fa-puzzle-piece"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="telefono_emergencia">Teléfono de Emergencia:</label>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" id="telefono_emergencia"
-                                                    name="telefono_emergencia" required>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
-                                                        <i class="fas fa-puzzle-piece"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="fr_catalogo_nombre">Fecha de Nacimiento:</label>
-                                            <div class="input-group">
-                                                <input type="date" class="form-control" id="fh_nacimiento"
-                                                    name="fh_nacimiento" required>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip" title="NIT">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
@@ -160,10 +104,45 @@
                                             <label for="correo_electronico">Correo Electrónico:</label>
                                             <div class="input-group">
                                                 <input type="email" class="form-control" id="correo_electronico"
-                                                    name="correo_electronico" required>
+                                                    name="correo_electronico"
+                                                    value="{{ isset($persona) ? $persona->correo_electronico : null }}"
+                                                    required>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                        title="Correo Electrónico">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nombre_completo">Nombre Completo:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="nombre_completo"
+                                                    name="nombre_completo"
+                                                    value="{{ isset($persona) ? $persona->nombre_completo : null }}"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Nombre Completo">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="departamento">Departamento:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="departamento"
+                                                    name="departamento"
+                                                    value="{{ isset($persona) ? $persona->departamento : null }}" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Departamento">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
@@ -174,25 +153,44 @@
                                             <label for="direccion">Dirección:</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="direccion"
-                                                    name="direccion" required>
+                                                    name="direccion"
+                                                    value="{{ isset($persona) ? $persona->direccion : null }}" required>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                        title="Dirección">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fh_nacimiento">Fecha de Nacimiento:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="fh_nacimiento"
+                                                    name="fh_nacimiento"
+                                                    value="{{ isset($persona) ? $persona->fh_nacimiento : null }}"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary" data-toggle="tooltip"
+                                                        title="Fecha de Nacimiento">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
 
-
                                         <div class="form-group">
                                             <label for="telefono">Teléfono:</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="telefono"
-                                                    name="telefono" required>
+                                                    name="telefono"
+                                                    value="{{ isset($persona) ? $persona->telefono : null }}" required>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="Fecha Nacimiento">
+                                                        title="Teléfono">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
@@ -202,15 +200,19 @@
                                         <div class="form-group">
                                             <label for="sexo">Sexo:</label>
                                             <div class="input-group">
-                                                <select id="tipo_solicitud" class="custom-select"
-                                                    title="Tipo de Solicitud" required>
-                                                    <option selected>Seleccione...</option>
-                                                    <option value="M">Masculino</option>
-                                                    <option value="F">Femenino</option>
+                                                <select id="sexo" class="custom-select" name="sexo"
+                                                    title="Sexo" required>
+                                                    <option value="" disabled selected>Seleccione...</option>
+                                                    <option value="M"
+                                                        {{ isset($persona) && $persona->sexo == 'M' ? 'selected' : '' }}>
+                                                        Masculino</option>
+                                                    <option value="F"
+                                                        {{ isset($persona) && $persona->sexo == 'F' ? 'selected' : '' }}>
+                                                        Femenino</option>
                                                 </select>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-secondary" data-toggle="tooltip"
-                                                        title="TIpo de Solicitud">
+                                                        title="Sexo">
                                                         <i class="fas fa-puzzle-piece"></i>
                                                     </button>
                                                 </div>
@@ -218,9 +220,11 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <a class="btn btn-danger btn-lg" href="{{ route('lista_personas') }}"><i
                                         class="fas fa-reply"></i></i>Regrar</a>
-                                <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                                <a href="#" id="btn_guardar_alta" class="btn btn-success btn-lg"><i
+                                        class="fas fa-save"></i>&nbsp;Guardar</a>
 
                             </div>
                         </div>
@@ -234,6 +238,46 @@
         $(document).ready(function() {
             $("#btn_actualizar").click(function() {
                 location.reload();
+            });
+        });
+
+        $("#btn_guardar_alta").click(function(e) {
+            e.preventDefault();
+            var id_persona = $("#id_persona").val();
+            var cui = $("#cui").val();
+            var nombre_completo = $("#nombre_completo").val();
+            var telefono = $("#telefono").val();
+            var correo_electronico = $("#correo_electronico").val();
+            var fh_nacimiento = $("#fh_nacimiento").val();
+            var direccion = $("#direccion").val();
+            var sexo = $("#sexo").val();
+            var nit = $("#nit").val();
+            var departamento = $("#departamento").val();
+            var pais = $("#pais").val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('guardar_altas') }}",
+                data: {
+                    id_persona: id_persona,
+                    cui: cui,
+                    nombre_completo: nombre_completo,
+                    telefono: telefono,
+                    correo_electronico: correo_electronico,
+                    fh_nacimiento: fh_nacimiento,
+                    direccion: direccion,
+                    sexo: sexo,
+                    nit: nit,
+                    departamento: departamento,
+                    pais: pais,
+                },
+                success: function(response) {
+                    if (!response.success) {
+                        toastr.error(response.message);
+                    } else {
+                        toastr.success(response.message);
+                        location.reload();
+                    }
+                }
             });
         });
     </script>

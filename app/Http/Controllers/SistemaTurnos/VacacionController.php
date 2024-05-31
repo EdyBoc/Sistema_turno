@@ -11,6 +11,7 @@ use App\Models\SistemaTurnos\Persona;
 use App\Models\SistemaTurnos\Vacacion;
 use App\Models\SistemaTurnos\ReporteHoras;
 use App\Models\SistemaTurnos\Solicitud;
+use App\Models\SistemaTurnos\Vw_usuario_autorizados;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Validator;
@@ -32,16 +33,9 @@ class VacacionController extends Controller
     public function vista(Request $request)
     {
 
-        $vacacion = Vacacion::all();
+        $vw_usuario_autorizado['vw_usuario_autorizados'] = Vw_usuario_autorizados::where('estado', true)->get();
 
-        $totalReporteHoras = ReporteHoras::whereNull('estado')->orWhere('estado', '')->count();
-        $totalSolicitudes = Solicitud::whereNull('estado')->orWhere('estado', '')->count();
-
-        return view('sistemaTurnos.vacacion.index_vacaciones', [
-            'vacaciones' => $vacacion,
-            'totalReporteHoras' => $totalReporteHoras,
-            'totalSolicitudes' => $totalSolicitudes,
-        ]);
+        return view('sistemaTurnos.vacacion.index_vacaciones', $vw_usuario_autorizado);
     }
 
     public function crear_vacaciones(Request $request)
@@ -52,29 +46,9 @@ class VacacionController extends Controller
 
         $this->pageData['dias'] = $dias;
 
-        $persona = Persona::pluck('nombre_completo', 'id_persona');
-
-        $this->pageData['persona'] = $persona;
-
-        return view('sistemaTurnos.vacacion.crear_vacaciones', $this->pageData);
-    }
-
-    public function filtar_datos_persona(Request $request)
-    {
-
-        $id_persona = $request->input('persona');
+        $id_persona = $request->id;
         $persona = Persona::find($id_persona);
-        $cui = $persona->cui;
-        $correo_electronico = $persona->correo_electronico;
-        $fecha_nacimiento = Carbon::createFromFormat('Y-m-d', $persona->fh_nacimiento);
-        $fecha_contratado = $persona->fh_contratado;
-        $edad = $fecha_nacimiento->diffInYears();
-        $datos = [
-            'cui' => $cui,
-            'correo_electronico' => $correo_electronico,
-            'edad' => $edad,
-            'fecha_contratado' => $fecha_contratado
-        ];
-        return response()->json($datos);
+
+        return view('sistemaTurnos.vacacion.crear_vacaciones', ['persona' => $persona]);
     }
 }

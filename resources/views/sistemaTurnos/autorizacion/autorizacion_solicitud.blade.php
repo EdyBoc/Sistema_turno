@@ -54,10 +54,12 @@
                                                     </td>
                                                     </td>
                                                     <td style="text-align: center;">
-                                                        <a class="btn" data-toggle="modal"
-                                                            data-target="#modal_add_solicitud"
-                                                            data-id="{{ $solicitud->id_solicitud }}"><i
-                                                                class="fas fa-street-view"></i></a>
+                                                        <a data-toggle="modal" data-target="#modal_add_solicitud"
+                                                            data-id="{{ $solicitud->id_solicitud }}"
+                                                            data-user="{{ $solicitud->user }}"
+                                                            data-tipo_solicitud="{{ $solicitud->tipo_solicitud }}"
+                                                            class="btn text-center editar_solicitud">
+                                                            <i class="fas fa-user-cog text-primary"></i>Autorizar</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -75,16 +77,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white  text-center">
-                    <h5 class="modal-title  mx-auto">Autorizacion</h5>
+                    <h5 class="modal-title  mx-auto">Crear Autorizacion</h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="fr_catalogo_nombre">Selccione:</label>
+                        <label for="fr_catalogo_nombre">Selccione Tipo de Autorizacion:</label>
                         <div class="input-group">
-                            <select id="tipo_solicitud" class="custom-select" title="Tipo de Solicitud">
-                                <option selected>Seleccione Estado de Aprobación</option>
-                                <option value="Autorizado">Autorizado</option>
-                                <option value="Denegado">Denegado</option>
+                            <select id="tipo_autorizacion" class="custom-select" title="Tipo de Autorizacion">
+                                <option value="" disabled selected>Seleccione...</option>
+                                <option value="1">Autorizado</option>
+                                <option value="0">Denegado</option>
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="TIpo de Solicitud">
@@ -93,7 +95,6 @@
                             </div>
                         </div>
                     </div>
-                    <input type="text" id="modal_id_solicitud" value="" readonly>
                     <div class="form-group">
                         <label for="comentario">Comentario:</label>
                         <div class="input-group">
@@ -105,13 +106,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <input type="hidden" id="id_solicitud" readonly>
+
+                    <div class="form-group">
+                        <label for="comentario">Usurio:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="user" name="user" readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Comentario">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comentario">Tipo Solicitud:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="tipo_solicitud" name="tipo_solicitud"
+                                readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" data-toggle="tooltip" title="Comentario">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer justify-content-center">
                     <a id="btnCerrar" onclick="$('#modal_add_solicitud').modal('hide');" class="btn btn-danger btn-lg"><i
                             class="fa fa-times"></i>&nbsp;Cancelar</a>
                     &nbsp;
-                    <a href="#" id="btn_guardar_catalogo" class="btn btn-success btn-lg"><i
+                    <a href="#" id="btn_guardar_autorizacion" class="btn btn-success btn-lg"><i
                             class="fas fa-save"></i>&nbsp;Guardar</a>
                 </div>
             </div>
@@ -126,11 +155,41 @@
             });
         });
 
-        $('#modal_add_solicitud').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var idSolicitud = button.data('id');
-            var modal = $(this);
-            modal.find('#modal_id_solicitud').val(idSolicitud);
+        $(document).ready(function() {
+            $('.editar_solicitud').on('click', function() {
+                var id = $(this).data('id');
+                var user = $(this).data('user');
+                var tipo_solicitud = $(this).data('tipo_solicitud');
+
+                $('#id_solicitud').val(id);
+                $('#user').val(user);
+                $('#tipo_solicitud').val(tipo_solicitud);
+            });
+        });
+
+
+        $("#btn_guardar_autorizacion").click(function(e) {
+            e.preventDefault();
+            var id_solicitud = $("#id_solicitud").val();
+            var comentario = $("#comentario").val();
+            var tipo_autorizacion = $("#tipo_autorizacion").val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('guardar_solicitud_editado') }}",
+                data: {
+                    id_solicitud: id_solicitud,
+                    comentario: comentario,
+                    tipo_autorizacion: tipo_autorizacion,
+                },
+                success: function(response) {
+                    if (!response.success) {
+                        toastr.error(response.message);
+                    } else {
+                        toastr.success(response.message);
+                        location.reload();
+                    }
+                }
+            });
         });
     </script>
 @endsection

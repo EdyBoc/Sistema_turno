@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SistemaTurnos\Solicitud;
 use App\Models\SistemaTurnos\ReporteHoras;
 use App\Models\SistemaTurnos\Vw_usuarios;
+use App\Models\SistemaTurnos\Autorizacion;
 use App\Models\baseModel;
 use Carbon\Carbon;
 use Validator;
@@ -76,7 +77,81 @@ class AutorizacionController extends Controller
         return view('sistemaTurnos.autorizacion.autorizacion_solicitud', $solicitud);
     }
 
-    public function consulta(Request $request)
+    public function guardar_solicitud_editado(Request $request)
     {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'comentario' => 'required',
+                'tipo_autorizacion' => 'required',
+            ],
+            [
+                'comentario.required' => 'Debe ingresar nombre de Rol',
+                'tipo_autorizacion.required' => 'Debe ingresar descripcion de Rol',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Debe llenar todos los campos',
+            ]);
+        }
+
+
+        $solicitud = Solicitud::find($request->id_solicitud);
+        $solicitud->estado = $request->tipo_autorizacion;
+        if ($solicitud->save()) {
+
+            $fecha_autorizacion = Carbon::now();
+            $fn_ingreso = Carbon::now();
+            $fn_ultima_modificacion = Carbon::now();
+            $ip = $request->ip();
+            $user = $request->user()->name;
+
+            $autorizacion = Autorizacion::where('id_solicitud', $solicitud->id_solicitud)->first();
+
+            if ($autorizacion) {
+                // Si existe, actualiza la autorización
+                $autorizacion->obervacion = $request->comentario;
+                $autorizacion->fecha_autorizacion = $fecha_autorizacion;
+                $autorizacion->estado = $request->tipo_autorizacion;
+                $autorizacion->user = $user;
+                $autorizacion->fn_ultima_modificacion = $fn_ultima_modificacion;
+                $autorizacion->ip = $ip;
+
+                if ($autorizacion->save()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Se ha edito con exito',
+                    ]);
+                }
+            } else {
+                // Si no existe, crea una nueva autorización
+                $autorizacion = new Autorizacion();
+                $autorizacion->id_solicitud = $solicitud->id_solicitud;
+                $autorizacion->obervacion = $request->comentario;
+                $autorizacion->fecha_autorizacion = $fecha_autorizacion;
+                $autorizacion->estado = $request->tipo_autorizacion;
+                $autorizacion->user = $user;
+                $autorizacion->fn_ingreso = $fn_ingreso;
+                $autorizacion->ip = $ip;
+
+                if ($autorizacion->save()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Se ha registrado con exito',
+                    ]);
+                }
+            }
+        } else {
+            if ($autorizacion->save()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No se pudo realizar el registro',
+                ]);
+            }
+        }
     }
 }
