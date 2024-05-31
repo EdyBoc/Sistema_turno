@@ -522,7 +522,7 @@
         FROM
             users us
         LEFT JOIN
-            persona pers ON us.cui = pers.cui
+            Persona pers ON us.cui = pers.cui
         LEFT JOIN
             solicitud scl ON us.id = scl.id_usuario
         LEFT JOIN
