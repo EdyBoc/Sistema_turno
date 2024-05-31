@@ -102,7 +102,7 @@
                         <div class="card-body">
                             <h4 style="text-align: center;">Bienvenido</h4>
                             <div class="sidebar-brand" style="text-align: center;">
-                                <img class="navbar-brand-full app-header-logo" src="{{ asset('img/config.jpg') }}"
+                                <img class="navbar-brand-full app-header-logo" src="{{ secure_asset('img/config.jpg') }}"
                                     width="150" alt="Infyom Logo">
                                 <a href="{{ url('/') }}"></a>
                             </div>
