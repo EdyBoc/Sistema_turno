@@ -1,30 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Document</title>
-</head>
+@section('page_css')
+    <style>
+        .dropdown-menu {
+            min-width: auto;
+            width: auto;
+        }
 
-<body>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="justify-content-center text-center">
+        .select-rounded {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-                        <a class="btn btn-primary btn-lg" data-toggle="modal"
-                            data-target="#modal_add_catalogo_dependencia"><i class="fas fa-street-view"></i>
-                            Nuevo registro</a>
+        .table thead th {
+            background-color: #6b6e86;
+            color: rgb(255, 255, 255);
+            /* Color de fondo azul claro */
+        }
+
+        /* Estilo para la tabla */
+        .table {
+            border-collapse: separate;
+            width: 100%;
+            border-radius: 10px;
+            /* Borde redondeado para la tabla */
+            overflow: hidden;
+            /* Para que los bordes redondeados se vean correctamente */
+        }
+
+        /* Estilo para las celdas de la tabla */
+        .table th,
+        .table td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            /* Ajuste el espaciado de las celdas aquí */
+        }
+
+        /* Estilo para las filas impares */
+        .table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .modal {
+            z-index: 1050;
+            /* Ajusta este valor según sea necesario */
+        }
+    </style>
+@endsection
+
+@section('content')
+    <section class="section">
+        <div class="section-header">
+            <h3 class="page__heading">Lista Catalogo Dependencia</h3>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="justify-content-center text-center">
+                                <a class="btn btn-primary btn-lg" data-toggle="modal"
+                                    data-target="#modal_add_catalogo_dependencia"><i class="fas fa-street-view"></i>
+                                    Nuevo</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    </section>
+
+    <!-- Modal nuevo Catalogo-->
     <div class="modal fade" id="modal_add_catalogo_dependencia" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -66,12 +112,15 @@
             </div>
         </div>
     </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+@endsection
+@section('scripts')
     <script>
+        $(document).ready(function() {
+            $("#btn_actualizar").click(function() {
+                location.reload();
+            });
+        });
+
         $("#btn_guardar_catalogo_dependencia").click(function(e) {
             e.preventDefault();
             var nombre_dependencia = $("#nombre_dependencia").val();
@@ -94,8 +143,4 @@
             });
         });
     </script>
-
-
-</body>
-
-</html>
+@endsection
