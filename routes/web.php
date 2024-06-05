@@ -14,7 +14,7 @@ use App\Http\Controllers\SistemaTurnos\UsuariosController;
 use App\Http\Controllers\SistemaTurnos\CatalogoRolController;
 use App\Http\Controllers\SistemaTurnos\PerfilController;
 use App\Http\Controllers\SistemaTurnos\AutorizacionController;
-
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +35,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Se agrego ruta registros 1/06/2024
+Route::post('/registro', [App\Http\Controllers\Auth\RegisterController::class, 'create']);
 
 //y creamos un grupo de rutas protegidas para los controladores
 Route::group(['middleware' => ['auth']], function () {
