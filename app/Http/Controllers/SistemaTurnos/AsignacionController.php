@@ -6,7 +6,7 @@ namespace App\Http\Controllers\SistemaTurnos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Encryption\Encrypter;
-use App\Models\SistemaTurnos\vw_usuarios;
+use App\Models\SistemaTurnos\Vw_usuarios;
 use App\Models\SistemaTurnos\Catalogo_dependencia;
 use App\Models\SistemaTurnos\Catalogo_turno;
 use App\Models\SistemaTurnos\AsignacionDependencia;
@@ -41,7 +41,7 @@ class AsignacionController extends Controller
 
     public function view_asignacion_dependencia(Request $request)
     {
-        $usuarios = vw_usuarios::pluck('name', 'id');
+        $usuarios = Vw_usuarios::pluck('name', 'id');
         $this->pageData['usuarios'] = $usuarios;
 
         $catalogo_dependencia = Catalogo_dependencia::pluck('nombre', 'id_catalogo_dependencia');
@@ -117,7 +117,7 @@ class AsignacionController extends Controller
                 $nombre_dependencia = Catalogo_dependencia::where('id_catalogo_dependencia', $asignacion_turno->id_catalogo_dependencia)
                     ->value('nombre');
 
-                $nombre_usuario = vw_usuarios::where('id', $asignacion_turno->id_usuario)
+                $nombre_usuario = Vw_usuarios::where('id', $asignacion_turno->id_usuario)
                     ->value('name');
 
                 $asignacion_turno->nombre_dependencia = $nombre_dependencia;
@@ -150,7 +150,7 @@ class AsignacionController extends Controller
     public function view_asignacion_turno(Request $request)
     {
 
-        $usuarios = vw_usuarios::pluck('name', 'id');
+        $usuarios = Vw_usuarios::pluck('name', 'id');
         $this->pageData['usuarios'] = $usuarios;
 
         $catalogo_turno = Catalogo_turno::pluck('nombre', 'id_catalogo_turno');
@@ -174,7 +174,7 @@ class AsignacionController extends Controller
                 $nombre_turno = Catalogo_turno::where('id_catalogo_turno', $asignacion_turno->id_catalogo_turno)
                     ->value('nombre');
 
-                $nombre_usuario = vw_usuarios::where('id', $asignacion_turno->id_usuario)
+                $nombre_usuario = Vw_usuarios::where('id', $asignacion_turno->id_usuario)
                     ->value('name');
 
                 $inicio = Catalogo_turno::where('id_catalogo_turno', $asignacion_turno->id_catalogo_turno)
