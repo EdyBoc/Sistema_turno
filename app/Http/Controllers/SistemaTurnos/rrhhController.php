@@ -17,7 +17,7 @@ use Storage;
 use View;
 
 
-class RrhhController extends Controller
+class rrhhController extends Controller
 {
 
     public function listar(Request $request)

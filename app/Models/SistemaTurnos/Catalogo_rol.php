@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class catalogo_rol extends Model
+class Catalogo_rol extends Model
 {
     use HasFactory;
 
