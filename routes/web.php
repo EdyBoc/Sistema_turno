@@ -79,10 +79,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/crear_vacaciones', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'crear_vacaciones'])->name('crear_vacaciones');
     Route::get('/filtar_persona', [App\Http\Controllers\SistemaTurnos\VacacionController::class, 'filtar_datos_persona'])->name('filtar_persona');
     //Recursos Humanos
-    Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'listar'])->name('index_listar');
-    Route::get('/index_alta', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'view_nueva_alta'])->name('index_alta');
-    Route::get('/lista_personas', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'lista_personas'])->name('lista_personas');
-    Route::post('/guardar_altas', [App\Http\Controllers\SistemaTurnos\RrhhController::class, 'guardar_personas_altas'])->name('guardar_altas');
+    Route::get('/index_listar', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'listar'])->name('index_listar');
+    Route::get('/index_alta', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'view_nueva_alta'])->name('index_alta');
+    Route::get('/lista_personas', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'lista_personas'])->name('lista_personas');
+    Route::post('/guardar_altas', [App\Http\Controllers\SistemaTurnos\rrhhController::class, 'guardar_personas_altas'])->name('guardar_altas');
     //Reporteria
     Route::get('/index_reporte', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'vista'])->name('index');
     Route::post('/reporte_horas', [App\Http\Controllers\SistemaTurnos\ReporteriaController::class, 'horasSalidaChart'])->name('reporte_horas');
