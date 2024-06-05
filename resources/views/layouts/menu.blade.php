@@ -4,19 +4,10 @@
             <i class="fas fa-home"></i><span>Inicio</span>
         </a>
         <a class="nav-link" href="/index_catalogo">
-            <i class="fas fa-book"></i><span>Catálogo</span>
+            <i class="fas fa-book"></i><span></span>
         </a>
         <a class="nav-link" href="/index_asignacion">
-            <i class="fas fa-clipboard-list"></i><span>Asignación</span>
-        </a>
-        <a class="nav-link" href="/index_perfil">
-            <i class="fas fa-walking"></i><span>Gestion de Usuario</span>
-        </a>
-        <a class="nav-link" href="index_listar">
-            <i class="fas fa-paperclip"></i><span>Recursos Humanos</span>
-        </a>
-        <a class="nav-link" href="index_reporte">
-            <i class="fas fa-paperclip"></i><span>Repostería</span>
+            <i class="fas fa-clipboard-list"></i><span></span>
         </a>
     </li>
 @else

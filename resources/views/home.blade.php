@@ -42,9 +42,6 @@
                     <i class="fas fa-paperclip"></i><span> Repostería</span>
                 </a>
             @elseif($rol_usuario == 'Coordinador')
-                <a class="nav-link" href="/index_asignacion">
-                    <i class="fas fa-clipboard-list"></i><span> Asignación</span>
-                </a>
                 <a class="nav-link" href="/index_listar">
                     <i class="fas fa-paperclip"></i><span> Recursos Humanos</span>
                 </a>
