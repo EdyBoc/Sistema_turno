@@ -20,7 +20,6 @@
 
                                 <a class="btn btn-primary  btn-lg" id="btn_actualizar"><i class="fas fa-history"></i>
                                     Actualizar</a>
-                                <a class="btn btn-danger  btn-lg" id=""><i class="far fa-file-pdf"></i> PDF</a>
 
                             </div>
                         </div>
