@@ -253,21 +253,6 @@
         FOREIGN KEY (id_usuario) REFERENCES users(id)
     );
 
-    CREATE TABLE asignacion_turno (
-    id_asignacion_turno INT PRIMARY KEY AUTO_INCREMENT,
-    id_catalogo_turno INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fh_asignacion DATE NOT NULL,
-    estado BOOLEAN,
-    user varchar(191),
-    fn_ingreso datetime ,
-    fn_ultima_modificacion datetime ,
-    ip VARCHAR(15) ,
-    FOREIGN KEY (id_catalogo_turno) REFERENCES Catalogo_turno(id_catalogo_turno),
-    FOREIGN KEY (id_usuario) REFERENCES users(id)
-    );
-
-
 
  CREATE TABLE Asignacion_dependencia (
     id_asignacion_dependencia INT PRIMARY KEY AUTO_INCREMENT,
@@ -300,7 +285,7 @@
 
 
 --Esta tabla es funcional
-    CREATE TABLE Persona (
+    CREATE TABLE persona (
     id_persona INT PRIMARY KEY AUTO_INCREMENT,
     cui VARCHAR(36) NOT NULL UNIQUE,
     nombre_completo VARCHAR(255) NOT NULL,
@@ -522,7 +507,7 @@
         FROM
             users us
         LEFT JOIN
-            Persona pers ON us.cui = pers.cui
+            persona pers ON us.cui = pers.cui
         LEFT JOIN
             solicitud scl ON us.id = scl.id_usuario
         LEFT JOIN

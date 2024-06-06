@@ -37,7 +37,7 @@ class UsuariosController extends Controller
     public function usuarios(Request $request)
     {
 
-        $usuarios = vw_usuarios::pluck('name', 'id');
+        $usuarios = Vw_usuarios::pluck('name', 'id');
         $this->pageData['usuarios'] = $usuarios;
 
         $catalogo_rol = Catalogo_rol::pluck('nombre', 'id_catalogo_rol');
@@ -62,7 +62,7 @@ class UsuariosController extends Controller
                 $nombre_rol = Catalogo_rol::where('id_catalogo_rol', $asignacion_rol->id_catalogo_rol)
                     ->value('nombre');
 
-                $nombre_usuario = vw_usuarios::where('id', $asignacion_rol->id_usuario)
+                $nombre_usuario = Vw_usuarios::where('id', $asignacion_rol->id_usuario)
                     ->value('name');
 
                 $asignacion_rol->nombre_rol = $nombre_rol;
