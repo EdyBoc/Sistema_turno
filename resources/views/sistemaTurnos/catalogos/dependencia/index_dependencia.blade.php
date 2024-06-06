@@ -183,7 +183,7 @@
             var descripcion = $("#descripcion").val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('guardar_catalogo_rol') }}",
+                url: "{{ route('guardar_dependencia') }}",
                 data: {
                     catalogo_rol: catalogo_rol,
                     descripcion: descripcion,
@@ -218,7 +218,7 @@
             var editado_descripcion = $("#editado_descripcion").val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('guardar_rol_editado') }}",
+                url: "{{ route('guardar_dependencia_editado') }}",
                 data: {
                     id_catalogo_rol: id_catalogo_rol,
                     editado_nombre: editado_nombre,
