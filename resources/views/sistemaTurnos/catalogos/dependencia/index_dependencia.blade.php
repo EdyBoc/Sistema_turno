@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Lista Catalogo Rol</h3>
+            <h3 class="page__heading">Lista Catalogo Dependencia</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -49,11 +49,14 @@
                                         <tbody>
                                             @foreach ($catalogo_dependencias as $catalogo_dependencia)
                                                 <tr>
-                                                    <td style="text-align: center;">{{ $catalogo_dependencia->id_catalogo_dependencia }}
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->id_catalogo_dependencia }}
                                                     </td>
                                                     <td style="text-align: center;">{{ $catalogo_dependencia->nombre }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_dependencia->descripcion }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_dependencia->fn_catalogo_rol }}
+                                                    <td style="text-align: center;">{{ $catalogo_dependencia->descripcion }}
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->fn_catalogo_rol }}
                                                     </td>
                                                     <td style="text-align: center;">
                                                         <a data-toggle="modal" data-target="#modal_add_editado_catalogo_rol"

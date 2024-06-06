@@ -11,7 +11,7 @@ use App\Models\SistemaTurnos\Vw_usuarios;
 use App\Models\SistemaTurnos\Autorizacion;
 use App\Models\baseModel;
 use Carbon\Carbon;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Response;
 use Storage;
 use View;
@@ -146,12 +146,10 @@ class AutorizacionController extends Controller
                 }
             }
         } else {
-            if ($autorizacion->save()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No se pudo realizar el registro',
-                ]);
-            }
+            return response()->json([
+                'success' => false,
+                'message' => 'No se pudo realizar el registro',
+            ]);
         }
     }
 }
