@@ -47,19 +47,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($catalogo_roles as $catalogo_rol)
+                                            @foreach ($catalogo_dependencias as $catalogo_dependencia)
                                                 <tr>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->id_catalogo_rol }}
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->id_catalogo_dependencia }}
                                                     </td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->nombre }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->descripcion }}</td>
-                                                    <td style="text-align: center;">{{ $catalogo_rol->fn_catalogo_rol }}
+                                                    <td style="text-align: center;">{{ $catalogo_dependencia->nombre }}</td>
+                                                    <td style="text-align: center;">{{ $catalogo_dependencia->descripcion }}
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        {{ $catalogo_dependencia->fn_catalogo_rol }}
                                                     </td>
                                                     <td style="text-align: center;">
                                                         <a data-toggle="modal" data-target="#modal_add_editado_catalogo_rol"
-                                                            data-id="{{ $catalogo_rol->id_catalogo_rol }}"
-                                                            data-nombre="{{ $catalogo_rol->nombre }}"
-                                                            data-descripcion="{{ $catalogo_rol->descripcion }}"
+                                                            data-id="{{ $catalogo_dependencia->id_catalogo_dependencia }}"
+                                                            data-nombre="{{ $catalogo_dependencia->nombre }}"
+                                                            data-descripcion="{{ $catalogo_dependencia->descripcion }}"
                                                             class="btn text-center editar_turno">
                                                             <i class="fas fa-edit text-primary"></i> Editar
                                                         </a>
