@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="catalogo_rol">
+                            <input type="text" class="form-control" id="nombre_dependencia">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre">
                                     <i class="fas fa-puzzle-piece"></i>
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Descripcion:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="descripcion">
+                            <input type="text" class="form-control" id="descripcion_dependencia">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="Descripcion">
                                     <i class="fas fa-puzzle-piece"></i>
@@ -138,7 +138,7 @@
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="editado_nombre">
+                            <input type="text" class="form-control" id="editar_nombre_dependencia">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="Nombre">
                                     <i class="fas fa-puzzle-piece"></i>
@@ -149,7 +149,7 @@
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Descripcion:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="editado_descripcion">
+                            <input type="text" class="form-control" id="editar_descripcion_dependencia">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" data-toggle="tooltip" title="Descripcion">
                                     <i class="fas fa-puzzle-piece"></i>
@@ -179,14 +179,14 @@
 
         $("#btn_guardar_catalogo_rol").click(function(e) {
             e.preventDefault();
-            var catalogo_rol = $("#catalogo_rol").val();
-            var descripcion = $("#descripcion").val();
+            var nombre_dependencia = $("#nombre_dependencia").val();
+            var descripcion_dependencia = $("#descripcion_dependencia").val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('guardar_catalogo_rol') }}",
+                url: "{{ route('guardar_dependencia') }}",
                 data: {
-                    catalogo_rol: catalogo_rol,
-                    descripcion: descripcion,
+                    nombre_dependencia: nombre_dependencia,
+                    descripcion_dependencia: descripcion_dependencia,
                 },
                 success: function(response) {
                     if (!response.success) {
@@ -214,15 +214,15 @@
         $("#btn_editado_catalogo_rol").click(function(e) {
             e.preventDefault();
             var id_catalogo_rol = $("#id_catalogo_rol").val();
-            var editado_nombre = $("#editado_nombre").val();
-            var editado_descripcion = $("#editado_descripcion").val();
+            var editar_nombre_dependencia = $("#editar_nombre_dependencia").val();
+            var editar_descripcion_dependencia = $("#editar_descripcion_dependencia").val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('guardar_rol_editado') }}",
+                url: "{{ route('guardar_dependencia_editado') }}",
                 data: {
                     id_catalogo_rol: id_catalogo_rol,
-                    editado_nombre: editado_nombre,
-                    editado_descripcion: editado_descripcion,
+                    editar_nombre_dependencia: editar_nombre_dependencia,
+                    editar_descripcion_dependencia: editar_descripcion_dependencia,
                 },
                 success: function(response) {
                     if (!response.success) {
