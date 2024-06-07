@@ -134,7 +134,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" class="form-control" id="id_catalogo_rol">
+                    <input type="hidden" class="form-control" id="id_catalogo_dependencia">
                     <div class="form-group">
                         <label for="fr_catalogo_nombre">Nombre:</label>
                         <div class="input-group">
@@ -204,23 +204,23 @@
                 var id = $(this).data('id');
                 var nombre = $(this).data('nombre');
                 var descripcion = $(this).data('descripcion');
-                $('#id_catalogo_rol').val(id);
-                $('#editado_nombre').val(nombre);
-                $('#editado_descripcion').val(descripcion);
+                $('#id_catalogo_dependencia').val(id);
+                $('#editar_nombre_dependencia').val(nombre);
+                $('#editar_descripcion_dependencia').val(descripcion);
             });
         });
 
 
         $("#btn_editado_catalogo_rol").click(function(e) {
             e.preventDefault();
-            var id_catalogo_rol = $("#id_catalogo_rol").val();
+            var id_catalogo_dependencia = $("#id_catalogo_dependencia").val();
             var editar_nombre_dependencia = $("#editar_nombre_dependencia").val();
             var editar_descripcion_dependencia = $("#editar_descripcion_dependencia").val();
             $.ajax({
                 type: "POST",
                 url: "{{ route('guardar_dependencia_editado') }}",
                 data: {
-                    id_catalogo_rol: id_catalogo_rol,
+                    id_catalogo_dependencia: id_catalogo_dependencia,
                     editar_nombre_dependencia: editar_nombre_dependencia,
                     editar_descripcion_dependencia: editar_descripcion_dependencia,
                 },
