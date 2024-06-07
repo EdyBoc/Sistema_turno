@@ -92,7 +92,8 @@
                         location.reload();
                     } else {
                         toastr.success(response.message);
-                        $("#id_credencial").val(response.clave);
+                        //$("#id_credencial").val(response.clave);
+                        location.reload();
                     }
                 }
             });
